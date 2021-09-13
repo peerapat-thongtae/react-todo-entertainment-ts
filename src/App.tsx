@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import './styles/main.css';
+import './styles/card.scss';
 
-function App() {
+import { Switch, Route, withRouter } from 'react-router-dom';
+import Home from 'pages/Home';
+import Movie from 'pages/Movie';
+import TV from 'pages/TV';
+import Login from 'pages/Login';
+import Signup from 'pages/Signup';
+import MovieDetail from 'pages/MovieDetail';
+import TVDetail from 'pages/TVDetail';
+import { checkExpiredToken } from 'store/actions/auth';
+import { getProfile } from 'store/actions/user';
+import { connect } from 'react-redux';
+
+function App(props: any) {
+  useEffect(() => {
+    props.getProfile().finally(() => {
+      // setLoading(false);
+    });
+    props.checkExpiredToken(props.history);
+  }, [props]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route exact path="/movie" component={Movie} />
+      <Route exact path="/tv" component={TV} />
+      <Route exact path="/signin" component={Login} />
+      <Route exact path="/signup" component={Signup} />
+      <Route exact path="/movie/popular" component={Movie} />
+      <Route exact path="/movie/trending" component={Movie} />
+      <Route exact path="/movie/top_rated" component={Movie} />
+      <Route exact path="/movie/:id" component={MovieDetail} />
+      <Route exact path="/tv/:id" component={TVDetail} />
+    </Switch>
   );
 }
 
-export default App;
+export default connect(null, { checkExpiredToken, getProfile })(
+  withRouter(App)
+);

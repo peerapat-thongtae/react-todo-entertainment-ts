@@ -1,17 +1,38 @@
 {
-  "name": "react-typescript-eslint-prettier-starter",
+  "name": "todo-entertainment-react-ts",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@brainhubeu/react-carousel": "^2.0.4",
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.2",
+    "axios": "^0.21.4",
+    "dayjs": "^1.10.6",
+    "jwt-decode": "^3.1.2",
+    "node-sass": "^6.0.1",
+    "postcss-loader": "^3.0.0",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-alice-carousel": "^2.5.1",
+    "react-dom": "^16.13.1",
+    "react-hook-form": "^7.15.3",
+    "react-multi-carousel": "^2.6.5",
+    "react-redux": "^7.2.5",
+    "react-router-dom": "^5.3.0",
+    "react-spinkit": "^3.0.0",
+    "redux": "^4.1.1",
+    "redux-thunk": "^2.3.0",
+    "swiper": "^7.0.4"
   },
   "devDependencies": {
+    "@types/brainhubeu__react-carousel": "^2.0.3",
     "@types/node": "^12.12.51",
     "@types/react": "^16.9.43",
     "@types/react-dom": "^16.9.8",
+    "@types/react-router-dom": "^5.1.8",
+    "@types/react-spinkit": "^3.0.7",
     "@typescript-eslint/eslint-plugin": "^3.7.1",
     "@typescript-eslint/parser": "^3.7.1",
+    "autoprefixer": "^9.8.6",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-airbnb-typescript": "^9.0.0",
     "eslint-config-prettier": "^6.11.0",
@@ -20,17 +41,20 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-react-hooks": "^4.0.0",
+    "postcss": "^8.3.6",
+    "postcss-cli": "^8.3.1",
     "prettier": "^2.0.5",
-    "typescript": "^3.9.7",
-    "react-scripts": "3.4.1"
+    "react-scripts": "^4.0.0",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.14",
+    "typescript": "^3.9.7"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "lint": "tsc --noEmit && eslint src/**/*.ts{,x}",
-    "format": "prettier --write src/**/*.ts{,x}",
-    "build": "react-scripts build",
-    "build:prod": "npm run format && npm run lint && npm run build",
-    "eject": "react-scripts eject"
+    "start": "npm run watch:css & react-scripts start",
+    "build": "npm run build:css & react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "build:css": "postcss src/styles/tailwind.css -o src/styles/main.css",
+    "watch:css": "postcss src/styles/tailwind.css -o src/styles/main.css --watch"
   },
   "eslintConfig": {
     "extends": "react-app"

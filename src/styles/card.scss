@@ -1,0 +1,29 @@
+@import './_variables.scss';
+
+.card-img {
+  img {
+    position: relative;
+    overflow: hidden;
+    background-color: $secondary-color;
+    
+    transition: transform 0.3s ease-in-out;
+  }
+  img:hover {
+    transform: scale(1.03);
+  }
+}
+
+.card-name {
+  margin-top: 1rem;
+  overflow: hidden;
+  font-size: 1.3rem;
+  text-overflow: ellipsis;
+  letter-spacing: $letter-spacing;
+  white-space: nowrap;
+
+  @media (min-width: $breakpoint-large) {
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+  }
+}
+

@@ -11,3 +11,67 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.dropdown:focus-within .dropdown-menu {
+  opacity: 1;
+  transform: translate(0) scale(1);
+  visibility: visible;
+}
+
+.button-todo {
+  /* background-color: #6617cb; */
+  /* background-image: linear-gradient(315deg, #6617cb 0%, #cb218e 74%); */
+  box-shadow: 0 0 0 0 #ec008c, 0.1rem 0.1rem 5px red;
+  /* box-shadow: 0 0 0 0 #ec008c, 0.2rem 0.2rem 60px red; */
+}
+
+.button-todo:hover {
+  box-shadow: 0 0 0 0 #ec008c, 0.2rem 0.2rem 60px red;
+}
+
+.link-to:hover {
+  --tw-text-opacity: 1;
+  color: rgba(249, 115, 22, var(--tw-text-opacity));
+}
+
+.overlay-content {
+  display: flex;
+  width: 100%;
+  left: 0;
+  top: 0;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+  position: fixed;
+  z-index: 999999;
+  background: rgba(0, 0, 0, 0.7);
+  flex-direction: column;
+}
+
+.overlay-content .wrapper {
+  display: inherit;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.overlay-content .wrapper .message {
+  margin-top: 20px;
+  color: white;
+  font-weight: bold;
+  text-shadow: 0 2px 5px black;
+}
+
+#movie-detail #poster {
+  width: 275px;
+}
+
+.featured_image {
+  width: 100%;
+  max-width: 100%;
+  -webkit-box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.47);
+  -moz-box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.47);
+  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.47);
+}
