@@ -15,9 +15,9 @@ import { getProfile } from 'store/actions/user';
 import { connect } from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
-import MovieList from 'pages/MovieList';
 import MoviePopular from 'pages/MoviePopular';
 import MovieUpcoming from 'pages/MovieUpcoming';
+import MovieTopRated from 'pages/MovieTopRated';
 
 function App(props: any) {
   useEffect(() => {
@@ -37,7 +37,7 @@ function App(props: any) {
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/movie/popular" component={MoviePopular} />
         <Route exact path="/movie/upcoming" component={MovieUpcoming} />
-        <Route exact path="/movie/top_rated" component={MovieList} />
+        <Route exact path="/movie/top_rated" component={MovieTopRated} />
         <Route exact path="/movie/:id" component={MovieDetail} />
         <Route exact path="/tv/:id" component={TVDetail} />
       </Switch>

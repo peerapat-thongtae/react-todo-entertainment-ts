@@ -3,8 +3,8 @@ import MovieService from 'services/MovieService';
 import MovieList from './MovieList';
 
 const MovieUpcoming = () => {
-  const getMovies = (page: number) => {
-    return MovieService.getMovieByType('upcoming', page);
+  const getMovies = (query: any) => {
+    return MovieService.getMovieByType('upcoming', query);
   };
   return <MovieList getMovies={getMovies} title="Movie Upcoming" />;
 };
