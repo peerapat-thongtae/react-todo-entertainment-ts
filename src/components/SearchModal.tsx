@@ -1,28 +1,32 @@
+/* eslint-disable prettier/prettier */
 import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import MultiService from 'services/MultiService';
 import _ from 'lodash';
 import { Link } from 'react-router-dom';
 import { setCloseModal } from '../store/actions/modal';
+import Loading from './Loading';
 
 const ListSearch = (props: any) => {
   return (
     <>
-      {props.results.slice(0, 10).map((result: any, key: number) => (
-        <Link to={`/${result.media_type}/${result.id}`} key={key}>
-          <div className="flex justify-start cursor-pointer text-gray-700 hover:text-blue-400 hover:bg-blue-100 rounded-md px-2 py-2 my-2">
-            <span className="bg-gray-400 h-2 w-2 m-2 rounded-full" />
-            <div className="flex-grow font-medium px-2">
-              {result.name || result.title || undefined}
+      {props.results.length > 0
+        ? props.results.slice(0, 10).map((result: any, key: number) => (
+          <Link to={`/${result.media_type}/${result.id}`} key={key}>
+            <div className="flex justify-start cursor-pointer text-gray-700 hover:text-blue-400 hover:bg-blue-100 rounded-md px-2 py-2 my-2">
+              <span className="bg-gray-400 h-2 w-2 m-2 rounded-full" />
+              <div className="flex-grow font-medium px-2">
+                {result.name || result.title || undefined}
+              </div>
+              <div className="text-sm font-normal text-gray-500 tracking-wide">
+                {result.media_type}
+                {result.known_for_department &&
+                  ` / ${result.known_for_department}`}
+              </div>
             </div>
-            <div className="text-sm font-normal text-gray-500 tracking-wide">
-              {result.media_type}
-              {result.known_for_department &&
-                ` / ${result.known_for_department}`}
-            </div>
-          </div>
-        </Link>
-      ))}
+          </Link>
+        ))
+        : <div className="flex justify-center items-center space-x-1 text-sm text-gray-700">No results</div>}
     </>
   );
 };
@@ -97,23 +101,7 @@ const SearchModal = (props: any) => {
                   {isSearching === false ? (
                     <ListSearch results={results} />
                   ) : (
-                    <div className="flex justify-center items-center space-x-1 text-sm text-gray-700">
-                      <svg
-                        fill="none"
-                        className="w-6 h-6 animate-spin"
-                        viewBox="0 0 32 32"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          clipRule="evenodd"
-                          d="M15.165 8.53a.5.5 0 01-.404.58A7 7 0 1023 16a.5.5 0 011 0 8 8 0 11-9.416-7.874.5.5 0 01.58.404z"
-                          fill="currentColor"
-                          fillRule="evenodd"
-                        />
-                      </svg>
-
-                      <div>Loading ...</div>
-                    </div>
+                    <Loading />
                   )}
                 </div>
                 <div className="block bg-gray-200 text-sm text-right py-2 px-3 -mx-3 -mb-2 rounded-b-lg">
