@@ -2,17 +2,22 @@ import DropdownTodo from 'components/DropdownTodo';
 import Layout from 'components/Layout';
 import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import MovieService from 'services/MovieService';
 import MovieHelper from 'utils/MovieHelper';
+import { setLoadingPage } from 'store/actions/loader';
+import Tag from 'components/Tag';
 
 const MovieDetail = (props: any) => {
   const movieId = props.match.params.id;
   const [movie, setMovie]: any = useState({});
   useEffect(() => {
+    props.setLoadingPage(true);
     MovieService.getMovieDetail(movieId).then((res) => {
       setMovie(res);
+      props.setLoadingPage(false);
     });
-  }, [movieId]);
+  }, [movieId, props, props.setLoadingPage]);
   return (
     <Layout>
       <section className="text-gray-700 body-font overflow-hidden justify-center">
@@ -21,9 +26,12 @@ const MovieDetail = (props: any) => {
             <img
               alt={movie.title}
               className="lg:w-1/2 w1/2 object-cover object-center rounded border border-gray-200 featured_image"
-              src={`${MovieHelper.posterPath(movie.poster_path)}`}
+              src={
+                movie.poster_path
+                  ? `${MovieHelper.posterPath(movie.poster_path)}`
+                  : '/poster/defaultposter.png'
+              }
             />
-
             <div className="lg:w-1/2 w-full lg:pl-16 lg:py-6 mt-6 lg:mt-0">
               <h1 className="text-gray-900 text-2xl font-bold title-font font-medium mb-1">
                 {movie.title}
@@ -84,23 +92,29 @@ const MovieDetail = (props: any) => {
               <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
                 <p className="leading-relaxed ">{movie.overview}</p>
               </div>
-              <div className="flex justify-center mb-4 pb-5 border-b-2 border-gray-200 mb-5">
-                <p className="leading-relaxed">
+              <div className="flex justify-center mb-4 pb-5 border-b-2 border-gray-200 mb-5 w-full">
+                <p className="leading-relaxed w-full">
                   <DropdownTodo media={movie} mediaType="movie" />
                 </p>
               </div>
-              {/* <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
+              <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
                 <span className="">
                   <div>
-                    <span className="mr-1 md: mb-2 md:px-4">Genre</span>
-                  </div>
-                  <div>
-                    {movie.genres.map((genre: any, index: number) => {
-                      return <Tag key={index} to="/movie" title={genre.name} />;
-                    })}
+                    {movie.genres &&
+                      movie.genres.map((genre: any, index: number) => {
+                        return (
+                          <>
+                            <Tag
+                              key={index}
+                              to={`/movie/discover?genre=${genre.id}`}
+                              title={genre.name}
+                            />
+                          </>
+                        );
+                      })}
                   </div>
                 </span>
-              </div> */}
+              </div>
             </div>
           </div>
         </div>
@@ -109,4 +123,4 @@ const MovieDetail = (props: any) => {
   );
 };
 
-export default MovieDetail;
+export default connect(null, { setLoadingPage })(MovieDetail);
