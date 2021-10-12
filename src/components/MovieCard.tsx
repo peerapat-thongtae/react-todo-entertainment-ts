@@ -2,10 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import MovieHelper from 'utils/MovieHelper';
 import dayjs from 'dayjs';
+import { connect } from 'react-redux';
 import DropdownTodo from './DropdownTodo';
 
 const MovieCard = (props: any) => {
   const { movie, mediaType } = props;
+
   return (
     <div className="justify-center items-center">
       <div className="container mx-auto max-w-xs rounded-lg overflow-hidden shadow-lg my-2 bg-white ">
@@ -26,11 +28,11 @@ const MovieCard = (props: any) => {
             className="text-center absolute w-full"
             style={{ bottom: '-30px' }}
           >
-            <DropdownTodo />
+            <DropdownTodo media={movie} mediaType={mediaType} />
           </div>
         </div>
         <div className="py-4 px-6 ">
-          <Link to={`${mediaType}/${movie.id}`}>
+          <Link to={`/${mediaType}/${movie.id}`}>
             <p className="tracking-wide text-2xl font-bold card-name link-to">
               {movie.title || movie.name}
             </p>
@@ -48,4 +50,9 @@ const MovieCard = (props: any) => {
   );
 };
 
-export default MovieCard;
+const mapStateToProps = (state: any) => ({
+  user: state.user,
+  errors: state.errors,
+});
+
+export default connect(mapStateToProps, {})(MovieCard);

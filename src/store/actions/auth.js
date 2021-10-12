@@ -15,7 +15,7 @@ export const loginUser = (state, history) => (dispatch) => {
     .then((resp) => {
       if (resp.data.success) {
         dispatch(setCurrentUser(resp.data.user));
-        AuthService.saveToken(resp.data.token);
+        AuthService.saveToken(resp.data.user.token);
         history.push('/');
       }
     })
@@ -48,7 +48,7 @@ export const registerUser = (data, history) => (dispatch) => {
     .then((resp) => {
       if (resp.data.success) {
         dispatch(registerSuccess());
-        history.push('/login');
+        history.push('/signin');
       }
     })
     .catch((error) => {
@@ -66,11 +66,10 @@ export const checkExpiredToken = (history) => (dispatch) => {
   let token = AuthService.getToken();
   if (token) {
     token = jwtDecode(token);
-    console.log(token.exp, Date.now() / 1000);
     if (token.exp < Date.now() / 1000) {
       AuthService.logout();
       dispatch(logoutUser());
-      history.push('/login');
+      history.push('/signin');
       // window.location.reload();
     }
   }

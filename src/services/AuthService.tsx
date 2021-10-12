@@ -3,13 +3,15 @@ import { API_TODO_URL } from '../config';
 
 const AuthService = {
   login(email: string, password: string) {
-    return axios.post(`${API_TODO_URL}/login`, { email, password });
+    return axios.post(`${API_TODO_URL}/users/login`, { email, password });
   },
   register(data: any) {
-    return axios.post(`${API_TODO_URL}/signup`, {}, { data });
+    return axios.post(`${API_TODO_URL}/register`, {}, { data });
   },
   getProfile() {
-    return axios.get(`${API_TODO_URL}/profile`, { headers: this.authHeader() });
+    return axios.get(`${API_TODO_URL}/users/me`, {
+      headers: this.authHeader(),
+    });
   },
   logout() {
     localStorage.removeItem('token');

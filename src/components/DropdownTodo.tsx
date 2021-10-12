@@ -1,7 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { toast } from 'react-toastify';
+import TodoService from 'services/TodoService';
+import { checkTodo } from 'utils/TodoHelper';
 
 const DropdownTodo = (props: any) => {
+  const { media, mediaType } = props;
+  const [todoStatus, setTodoStatus] = useState('');
+  useEffect(() => {
+    setTodoStatus(checkTodo(props.user.profile.todos, media.id));
+  }, [media, props.user.profile.todos]);
+  const handleChangeList = async (e: any) => {
+    const id = toast.loading('Please wait...');
+    const mediaData = {
+      id: media.id,
+      mediaType,
+      mediaName: media.name || media.title,
+      status: e.target.value,
+    };
+    const response = await TodoService.addMediaTodo(mediaData);
+    toast.update(id, {
+      render: 'Add media',
+      type: response.success ? 'success' : 'error',
+      autoClose: 2000,
+      isLoading: false,
+    });
+    setTodoStatus(mediaData.status);
+  };
+
   return (
     <div
       className={`relative inline-flex 
@@ -18,19 +44,22 @@ const DropdownTodo = (props: any) => {
           fillRule="nonzero"
         />
       </svg>
-      <select className="border border-gray-300 rounded-full text-red-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none button-todo">
-        <option>Choose watch type</option>
-        <option>WATCHLIST</option>
-        <option>WATCHED</option>
-        <option>WATCHING</option>
-        <option>WATING NEXT SEASON</option>
+      <select
+        value={todoStatus}
+        onChange={handleChangeList}
+        className="border border-gray-300 rounded-full text-red-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none button-todo"
+      >
+        <option value="">Choose watch type</option>
+        <option value="WATCHLIST">Watchlist</option>
+        <option value="WATCHED">Watched</option>
+        <option value="WATCHING">Watching</option>
       </select>
     </div>
   );
 };
+
 const mapStateToProps = (state: any) => ({
   user: state.user,
   errors: state.errors,
 });
-
 export default connect(mapStateToProps, {})(DropdownTodo);

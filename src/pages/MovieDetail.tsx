@@ -1,5 +1,5 @@
+import DropdownTodo from 'components/DropdownTodo';
 import Layout from 'components/Layout';
-import Tag from 'components/Tag';
 import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
 import MovieService from 'services/MovieService';
@@ -83,6 +83,11 @@ const MovieDetail = (props: any) => {
               </div>
               <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
                 <p className="leading-relaxed ">{movie.overview}</p>
+              </div>
+              <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
+                <p className="leading-relaxed">
+                  <DropdownTodo media={movie} mediaType="movie" />
+                </p>
               </div>
               {/* <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
                 <span className="">

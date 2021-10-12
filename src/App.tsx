@@ -13,6 +13,11 @@ import TVDetail from 'pages/TVDetail';
 import { checkExpiredToken } from 'store/actions/auth';
 import { getProfile } from 'store/actions/user';
 import { connect } from 'react-redux';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+import MovieList from 'pages/MovieList';
+import MoviePopular from 'pages/MoviePopular';
+import MovieUpcoming from 'pages/MovieUpcoming';
 
 function App(props: any) {
   useEffect(() => {
@@ -22,18 +27,21 @@ function App(props: any) {
     props.checkExpiredToken(props.history);
   }, [props]);
   return (
-    <Switch>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/movie" component={Movie} />
-      <Route exact path="/tv" component={TV} />
-      <Route exact path="/signin" component={Login} />
-      <Route exact path="/signup" component={Signup} />
-      <Route exact path="/movie/popular" component={Movie} />
-      <Route exact path="/movie/trending" component={Movie} />
-      <Route exact path="/movie/top_rated" component={Movie} />
-      <Route exact path="/movie/:id" component={MovieDetail} />
-      <Route exact path="/tv/:id" component={TVDetail} />
-    </Switch>
+    <>
+      <ToastContainer />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/movie" component={Movie} />
+        <Route exact path="/tv" component={TV} />
+        <Route exact path="/signin" component={Login} />
+        <Route exact path="/signup" component={Signup} />
+        <Route exact path="/movie/popular" component={MoviePopular} />
+        <Route exact path="/movie/upcoming" component={MovieUpcoming} />
+        <Route exact path="/movie/top_rated" component={MovieList} />
+        <Route exact path="/movie/:id" component={MovieDetail} />
+        <Route exact path="/tv/:id" component={TVDetail} />
+      </Switch>
+    </>
   );
 }
 

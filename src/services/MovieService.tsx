@@ -1,11 +1,11 @@
 import { ApiMovieHelper } from 'utils/APIHelper';
 
 const MovieService = {
-  getMovieByType: async (type: string) => {
+  getMovieByType: async (type: string, page = 1) => {
     try {
       const res = await ApiMovieHelper({
         method: 'GET',
-        url: `/3/movie/${type}`,
+        url: `/3/movie/${type}?page=${page}`,
       });
       return res.data;
     } catch (err) {

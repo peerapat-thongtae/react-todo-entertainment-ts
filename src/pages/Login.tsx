@@ -3,8 +3,6 @@ import Layout from 'components/Layout';
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import AuthService from 'services/AuthService';
 import { loginUser } from 'store/actions/auth';
 
 const Login = (props: any) => {
@@ -13,7 +11,6 @@ const Login = (props: any) => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  console.log(props.user);
   const submitLogin = async (data: any) => {
     const { email, password } = data;
     props.loginUser({ email, password }, props.history);

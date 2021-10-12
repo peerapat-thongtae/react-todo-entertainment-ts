@@ -30,7 +30,7 @@ const Header = (props: any) => {
               </Link>
             </li>
             <li className="mt-3 md:ml-16 md:mt-0">
-              <Link to="tv">
+              <Link to="/tv">
                 <span
                   className={`tracking-wide uppercase link-to
                     font-bold

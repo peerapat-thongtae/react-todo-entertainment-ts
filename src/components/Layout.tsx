@@ -5,7 +5,6 @@ import Header from './Header';
 import LoadingPage from './LoadingPage';
 
 const Layout = ({ children, loader, user }: any) => {
-  console.log(user);
   return (
     <>
       <LoadingPage show={loader.isLoading} />

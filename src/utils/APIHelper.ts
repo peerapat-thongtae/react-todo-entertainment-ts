@@ -9,9 +9,24 @@ interface APIRequestInterface {
   headers?: any;
 }
 
-const ApiConfig = (header: any) => {
+const ApiTmdbConfig = (header: any) => {
   const bearer = {
     Authorization: `Bearer ${ACCESS_TOKEN}`,
+  };
+  if (!header) {
+    return bearer;
+  }
+
+  if (!header.Authorization) {
+    return { ...header, ...bearer };
+  }
+
+  return header;
+};
+
+const ApiTodoConfig = (header: any) => {
+  const bearer = {
+    Authorization: `Bearer ${localStorage.getItem('token')}`,
   };
   if (!header) {
     return bearer;
@@ -30,7 +45,7 @@ export const ApiTodoHelper = (options: APIRequestInterface) => {
     url: `${API_TODO_URL}${options.url}`,
     params: options.params || {},
     data: options.data || {},
-    headers: ApiConfig(options.headers),
+    headers: ApiTodoConfig(options.headers),
   });
 };
 
@@ -40,6 +55,6 @@ export const ApiMovieHelper = (options: APIRequestInterface) => {
     url: `${API_TMDB_URL}${options.url}`,
     params: options.params || {},
     data: options.data || {},
-    headers: ApiConfig(options.headers),
+    headers: ApiTmdbConfig(options.headers),
   });
 };
