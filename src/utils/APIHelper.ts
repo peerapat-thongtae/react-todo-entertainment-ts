@@ -4,7 +4,7 @@ import { API_TODO_URL, ACCESS_TOKEN, API_TMDB_URL } from 'config';
 interface APIRequestInterface {
   method: Method;
   url: string;
-  params?: Request;
+  params?: any;
   data?: any;
   headers?: any;
 }

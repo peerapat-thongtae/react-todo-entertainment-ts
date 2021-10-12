@@ -4,6 +4,8 @@ import {
   LOGOUT,
   GET_ERRORS,
   LOADING_STATUS,
+  OPEN_MODAL,
+  CLOSE_MODAL,
 } from './types';
 
 export function setCurrentUser(user) {
@@ -36,5 +38,24 @@ export function loadingPage(status) {
   return {
     type: LOADING_STATUS,
     payload: status,
+  };
+}
+
+export function openModal(payload) {
+  return {
+    type: OPEN_MODAL,
+    payload,
+  };
+}
+
+export function closeModal() {
+  return {
+    type: CLOSE_MODAL,
+  };
+}
+
+export function searchTextModal(search) {
+  return {
+    search,
   };
 }

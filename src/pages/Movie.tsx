@@ -5,27 +5,28 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import MovieService from 'services/MovieService';
 import { setLoadingPage } from 'store/actions/loader';
+import { setOpenModal } from 'store/actions/modal';
 
 const Movie = (props: any) => {
   const [moviePopulars, setMoviePopulars] = useState([]);
   const [movieUpcomings, setMovieUpcomings] = useState([]);
   const [movieTopRated, setMovieTopRated] = useState([]);
-
   useEffect(() => {
     props.setLoadingPage(true);
-    MovieService.getMovieByType('popular').then((res) => {
+    MovieService.getMovieByType('popular', { page: 1 }).then((res) => {
       setMoviePopulars(res.results);
     });
 
-    MovieService.getMovieByType('upcoming').then((res) => {
+    MovieService.getMovieByType('upcoming', { page: 1 }).then((res) => {
       setMovieUpcomings(res.results);
     });
 
-    MovieService.getMovieByType('top_rated').then((res) => {
+    MovieService.getMovieByType('top_rated', { page: 1 }).then((res) => {
       setMovieTopRated(res.results);
       props.setLoadingPage(false);
     });
   }, [props]);
+
   return (
     <Layout>
       <MovieSlider
@@ -50,4 +51,6 @@ const Movie = (props: any) => {
   );
 };
 
-export default connect(null, { setLoadingPage })(withRouter(Movie));
+export default connect(null, { setLoadingPage, setOpenModal })(
+  withRouter(Movie)
+);

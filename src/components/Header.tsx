@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import DropdownProfile from './DropdownProfile';
+import SearchNavbar from './SearchNavbar';
 
 const Header = (props: any) => {
   return (
@@ -44,6 +45,9 @@ const Header = (props: any) => {
           </ul>
           <div className="relative z-50 mt-3 md:mt-0">
             <ul className="flex items-center flex-1 space-x-4 text-sm">
+              <li className="mt-3 md:ml-6 md:mt-0">
+                <SearchNavbar />
+              </li>
               {props.user.isAuthenticated ? (
                 <li className="mt-3 md:ml-6 md:mt-0">
                   <DropdownProfile profile={props.user.profile} />

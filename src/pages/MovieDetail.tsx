@@ -84,7 +84,7 @@ const MovieDetail = (props: any) => {
               <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
                 <p className="leading-relaxed ">{movie.overview}</p>
               </div>
-              <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
+              <div className="flex justify-center mb-4 pb-5 border-b-2 border-gray-200 mb-5">
                 <p className="leading-relaxed">
                   <DropdownTodo media={movie} mediaType="movie" />
                 </p>
