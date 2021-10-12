@@ -5,7 +5,7 @@ import MovieCard from './MovieCard';
 import '@brainhubeu/react-carousel/lib/style.css';
 
 const MovieSlider = (props: any) => {
-  const { title, movies, type, mediaType } = props;
+  const { title, movies, endpoint, mediaType } = props;
   const listMovies = movies.map((movie: any, index: number) => (
     <MovieCard key={index} movie={movie} mediaType={mediaType} />
   ));
@@ -15,7 +15,7 @@ const MovieSlider = (props: any) => {
         <div className="flex font-bold ">
           <div className="w-1/2 h-12 ml-10">{title}</div>
           <div className="w-1/2 h-12 mr-10 text-right">
-            <Link to={`${mediaType}/${type}`} className="hover:text-orange-500">
+            <Link to={endpoint} className="hover:text-orange-500">
               Show All
             </Link>
           </div>

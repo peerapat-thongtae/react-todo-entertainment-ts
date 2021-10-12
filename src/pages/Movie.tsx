@@ -31,19 +31,19 @@ const Movie = (props: any) => {
     <Layout>
       <MovieSlider
         title="Popular"
-        type="popular"
+        endpoint="/movie/popular"
         movies={moviePopulars}
         mediaType="movie"
       />
       <MovieSlider
         title="Upcoming"
-        type="upcoming"
+        endpoint="/movie/upcoming"
         movies={movieUpcomings}
         mediaType="movie"
       />
       <MovieSlider
         title="Top Rated"
-        type="top_rated"
+        endpoint="/movie/top_rated"
         movies={movieTopRated}
         mediaType="movie"
       />

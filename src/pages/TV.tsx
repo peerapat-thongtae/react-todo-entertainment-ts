@@ -23,13 +23,13 @@ const TV = (props: any) => {
     <Layout>
       <MovieSlider
         title="Popular"
-        type="popular"
+        endpoint="/tv/popular"
         movies={tvPopulars}
         mediaType="tv"
       />
       <MovieSlider
         title="Top Rated"
-        type="top_rated"
+        type="/tv/top_rated"
         movies={tvTopRated}
         mediaType="tv"
       />
