@@ -80,6 +80,24 @@ const TodoService = {
     }
   },
 
+  getTodoMovieByStatus: async (status: string, query = {}) => {
+    try {
+      const res = await ApiTodoHelper({
+        method: 'GET',
+        url: `/todo/movie/${status}`,
+        params: query,
+      });
+      const medias = await Promise.all(
+        res.data.todos.map((todo: any) =>
+          MovieService.getMovieDetail(todo.mediaId)
+        )
+      );
+      return { ...res.data, results: medias };
+    } catch (err) {
+      return err;
+    }
+  },
+
   getTVWatching: async () => {
     try {
       const res = await ApiTodoHelper({

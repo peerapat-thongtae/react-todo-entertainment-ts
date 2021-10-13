@@ -18,8 +18,8 @@ import { ToastContainer } from 'react-toastify';
 import MoviePopular from 'pages/MoviePopular';
 import MovieUpcoming from 'pages/MovieUpcoming';
 import MovieTopRated from 'pages/MovieTopRated';
-import MovieSearch from 'pages/MovieSearch';
 import SearchModal from 'components/SearchModal';
+import TodoMovie from 'pages/TodoMovie';
 
 function App(props: any) {
   useEffect(() => {
@@ -43,6 +43,8 @@ function App(props: any) {
         <Route exact path="/search/movie" component={SearchModal} />
         <Route exact path="/movie/:id" component={MovieDetail} />
         <Route exact path="/tv/:id" component={TVDetail} />
+        <Route exact path="/todo/movie/:status" component={TodoMovie} />
+        <Route exact path="/todo/tv/:status" component={TodoMovie} />
       </Switch>
     </>
   );
