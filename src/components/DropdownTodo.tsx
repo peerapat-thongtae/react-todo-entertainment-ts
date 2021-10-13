@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 import TodoService from 'services/TodoService';
+import ToastHelper from 'utils/ToastHelper';
 import { checkTodo } from 'utils/TodoHelper';
 
 const DropdownTodo = (props: any) => {
@@ -11,7 +12,7 @@ const DropdownTodo = (props: any) => {
     setTodoStatus(checkTodo(props.user.profile.todos, media.id));
   }, [media, props.user.profile.todos]);
   const handleChangeList = async (e: any) => {
-    const id = toast.loading('Please wait...');
+    const toastId = toast.loading('Please wait...');
     const mediaData = {
       id: media.id,
       mediaType,
@@ -19,11 +20,9 @@ const DropdownTodo = (props: any) => {
       status: e.target.value,
     };
     const response = await TodoService.addMediaTodo(mediaData);
-    toast.update(id, {
-      render: 'Add media',
-      type: response.success ? 'success' : 'error',
-      autoClose: 2000,
-      isLoading: false,
+    ToastHelper(toastId, {
+      title: 'Add media',
+      response,
     });
     setTodoStatus(mediaData.status);
   };

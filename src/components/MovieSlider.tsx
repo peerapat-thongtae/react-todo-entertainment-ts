@@ -20,21 +20,23 @@ const MovieSlider = (props: any) => {
             </Link>
           </div>
         </div>
-        <Carousel
-          draggable={false}
-          plugins={[
-            'infinite',
-            'arrows',
-            {
-              resolve: slidesToShowPlugin,
-              options: {
-                numberOfSlides: 4,
+        <div>
+          <Carousel
+            draggable={false}
+            plugins={[
+              'infinite',
+              'arrows',
+              {
+                resolve: slidesToShowPlugin,
+                options: {
+                  numberOfSlides: 4,
+                },
               },
-            },
-          ]}
-        >
-          {listMovies}
-        </Carousel>
+            ]}
+          >
+            {listMovies}
+          </Carousel>
+        </div>
       </div>
       <hr className="mb-10" />
     </>

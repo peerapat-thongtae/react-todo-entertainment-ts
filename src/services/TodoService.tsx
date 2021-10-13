@@ -1,5 +1,6 @@
 import { ApiTodoHelper } from 'utils/APIHelper';
 import MovieService from './MovieService';
+import TVService from './TVService';
 
 const TodoService = {
   addMediaTodo: async (mediaData: any) => {
@@ -19,7 +20,7 @@ const TodoService = {
     try {
       const res = await ApiTodoHelper({
         method: 'GET',
-        url: `/todo/mywatchlist/movie`,
+        url: `/todo/movie/watchlist`,
       });
       const medias = Promise.all(
         res.data.todos.map((todo: any) =>
@@ -36,12 +37,57 @@ const TodoService = {
     try {
       const res = await ApiTodoHelper({
         method: 'GET',
-        url: `/todo/mywatched/movie`,
+        url: `/todo/movie/watched`,
       });
       const medias = Promise.all(
         res.data.todos.map((todo: any) =>
           MovieService.getMovieDetail(todo.mediaId)
         )
+      );
+      return medias;
+    } catch (err) {
+      return err;
+    }
+  },
+
+  getTVWatchlist: async () => {
+    try {
+      const res = await ApiTodoHelper({
+        method: 'GET',
+        url: `/todo/tv/watchlist`,
+      });
+      const medias = Promise.all(
+        res.data.todos.map((todo: any) => TVService.getTVDetail(todo.mediaId))
+      );
+      return medias;
+    } catch (err) {
+      return err;
+    }
+  },
+
+  getTVWatched: async () => {
+    try {
+      const res = await ApiTodoHelper({
+        method: 'GET',
+        url: `/todo/tv/watched`,
+      });
+      const medias = Promise.all(
+        res.data.todos.map((todo: any) => TVService.getTVDetail(todo.mediaId))
+      );
+      return medias;
+    } catch (err) {
+      return err;
+    }
+  },
+
+  getTVWatching: async () => {
+    try {
+      const res = await ApiTodoHelper({
+        method: 'GET',
+        url: `/todo/tv/watching`,
+      });
+      const medias = Promise.all(
+        res.data.todos.map((todo: any) => TVService.getTVDetail(todo.mediaId))
       );
       return medias;
     } catch (err) {
