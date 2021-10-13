@@ -18,6 +18,20 @@ const MovieService = {
       const res = await ApiMovieHelper({
         method: 'GET',
         url: `/3/movie/${movieId}`,
+        params: {
+          append_to_response: 'watch/providers',
+        },
+      });
+      return res.data;
+    } catch (err) {
+      return err.response.data;
+    }
+  },
+  getMovieWatchProviders: async (movieId: string) => {
+    try {
+      const res = await ApiMovieHelper({
+        method: 'GET',
+        url: `/3/movie/${movieId}/watch/providers`,
       });
       return res.data;
     } catch (err) {

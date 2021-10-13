@@ -11,10 +11,15 @@ import Tag from 'components/Tag';
 const MovieDetail = (props: any) => {
   const movieId = props.match.params.id;
   const [movie, setMovie]: any = useState({});
+  const [watchProviders, setWatchProviders]: any = useState([]);
   useEffect(() => {
     props.setLoadingPage(true);
     MovieService.getMovieDetail(movieId).then((res) => {
       setMovie(res);
+      props.setLoadingPage(false);
+    });
+    MovieService.getMovieWatchProviders(movieId).then((res) => {
+      setWatchProviders((res.results.TH && res.results.TH.flaterate) || null);
       props.setLoadingPage(false);
     });
   }, [movieId, props, props.setLoadingPage]);
@@ -115,6 +120,22 @@ const MovieDetail = (props: any) => {
                   </div>
                 </span>
               </div>
+              {watchProviders && (
+                <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
+                  <span className="">
+                    <div>
+                      {watchProviders.flatrate &&
+                        watchProviders.flatrate.map(
+                          (flatrate: any, index: number) => {
+                            return (
+                              <Tag key={index} title={flatrate.provider_name} />
+                            );
+                          }
+                        )}
+                    </div>
+                  </span>
+                </div>
+              )}
             </div>
           </div>
         </div>
