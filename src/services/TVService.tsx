@@ -23,6 +23,17 @@ const TVService = {
       return err.response.data;
     }
   },
+  getTVWatchProviders: async (movieId: string) => {
+    try {
+      const res = await ApiMovieHelper({
+        method: 'GET',
+        url: `/3/tv/${movieId}/watch/providers`,
+      });
+      return res.data;
+    } catch (err) {
+      return err.response.data;
+    }
+  },
 };
 
 export default TVService;

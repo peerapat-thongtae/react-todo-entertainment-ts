@@ -1,18 +1,30 @@
+import DropdownTodo from 'components/DropdownTodo';
 import Layout from 'components/Layout';
 import Tag from 'components/Tag';
 import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import TVService from 'services/TVService';
 import MovieHelper from 'utils/MovieHelper';
+import { setLoadingPage } from 'store/actions/loader';
 
 const TVDetail = (props: any) => {
   const movieId = props.match.params.id;
   const [movie, setMovie]: any = useState({});
+  const [watchProviders, setWatchProviders] = useState([]);
   useEffect(() => {
-    TVService.getTVDetail(movieId).then((res: Response) => {
-      setMovie(res);
+    props.setLoadingPage(true);
+    Promise.all([
+      TVService.getTVDetail(movieId).then((res: Response) => {
+        setMovie(res);
+      }),
+      TVService.getTVWatchProviders(movieId).then((res) => {
+        setWatchProviders((res.results.TH && res.results.TH.flatrate) || null);
+      }),
+    ]).finally(() => {
+      props.setLoadingPage(false);
     });
-  }, [movieId]);
+  }, [movieId, props]);
   return (
     <Layout>
       <section className="text-gray-700 body-font overflow-hidden justify-center">
@@ -84,18 +96,44 @@ const TVDetail = (props: any) => {
               <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
                 <p className="leading-relaxed ">{movie.overview}</p>
               </div>
-              {/* <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
+              <div className="flex justify-center mb-4 pb-5 border-b-2 border-gray-200 mb-5 w-full">
+                <p className="leading-relaxed w-full">
+                  <DropdownTodo media={movie} mediaType="tv" />
+                </p>
+              </div>
+              <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
                 <span className="">
                   <div>
-                    <span className="mr-1 md: mb-2 md:px-4">Genre</span>
-                  </div>
-                  <div>
-                    {movie.genres.map((genre: any, index: number) => {
-                      return <Tag key={index} to="/movie" title={genre.name} />;
-                    })}
+                    {movie.genres &&
+                      movie.genres.map((genre: any, index: number) => {
+                        return (
+                          <>
+                            <Tag
+                              key={index}
+                              to={`/tv/discover?with_genres=${genre.id}`}
+                              title={genre.name}
+                            />
+                          </>
+                        );
+                      })}
                   </div>
                 </span>
-              </div> */}
+              </div>
+              <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
+                <span className="">
+                  <div>
+                    {watchProviders ? (
+                      watchProviders.map((flatrate: any, index: number) => {
+                        return (
+                          <Tag key={index} title={flatrate.provider_name} />
+                        );
+                      })
+                    ) : (
+                      <div>No Streaming In TH</div>
+                    )}
+                  </div>
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -104,4 +142,4 @@ const TVDetail = (props: any) => {
   );
 };
 
-export default TVDetail;
+export default connect(null, { setLoadingPage })(TVDetail);
