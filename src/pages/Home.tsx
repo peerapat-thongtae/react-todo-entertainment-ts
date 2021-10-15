@@ -1,9 +1,12 @@
 import Layout from 'components/Layout';
 import MovieSlider from 'components/MovieSlider';
 import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { setLoadingPage } from 'store/actions/loader';
+
 import TodoService from 'services/TodoService';
 
-const Home = () => {
+const Home = (props: any) => {
   const [watchlistMovies, setWatchlistMovies] = useState([]);
   const [watchedMovies, setWatchedMovies] = useState([]);
 
@@ -11,26 +14,30 @@ const Home = () => {
   const [watchingTV, setWatchingTV] = useState([]);
   const [watchedTV, setWatchedTV] = useState([]);
   useEffect(() => {
-    TodoService.getMyMovieWatchlist().then((res) => {
-      setWatchlistMovies(res);
-    });
+    props.setLoadingPage(true);
+    Promise.all([
+      TodoService.getMyMovieWatchlist().then((res) => {
+        setWatchlistMovies(res);
+      }),
+      TodoService.getMyMovieWatched().then((res) => {
+        setWatchedMovies(res);
+      }),
 
-    TodoService.getMyMovieWatched().then((res) => {
-      setWatchedMovies(res);
-    });
+      TodoService.getTVWatchlist().then((res) => {
+        setWatchlistTV(res);
+      }),
 
-    TodoService.getTVWatchlist().then((res) => {
-      setWatchlistTV(res);
-    });
+      TodoService.getTVWatching().then((res) => {
+        setWatchingTV(res);
+      }),
 
-    TodoService.getTVWatching().then((res) => {
-      setWatchingTV(res);
+      TodoService.getTVWatched().then((res) => {
+        setWatchedTV(res);
+      }),
+    ]).then(() => {
+      props.setLoadingPage(false);
     });
-
-    TodoService.getTVWatched().then((res) => {
-      setWatchedTV(res);
-    });
-  }, []);
+  }, [props]);
   return (
     <Layout>
       <MovieSlider
@@ -71,4 +78,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default connect(null, { setLoadingPage })(Home);

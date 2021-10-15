@@ -20,6 +20,7 @@ import MovieUpcoming from 'pages/MovieUpcoming';
 import MovieTopRated from 'pages/MovieTopRated';
 import SearchModal from 'components/SearchModal';
 import TodoMovie from 'pages/TodoMovie';
+import MovieDiscover from 'pages/MovieDiscover';
 
 function App(props: any) {
   useEffect(() => {
@@ -41,6 +42,7 @@ function App(props: any) {
         <Route exact path="/movie/upcoming" component={MovieUpcoming} />
         <Route exact path="/movie/top_rated" component={MovieTopRated} />
         <Route exact path="/search/movie" component={SearchModal} />
+        <Route exact path="/movie/discover" component={MovieDiscover} />
         <Route exact path="/movie/:id" component={MovieDetail} />
         <Route exact path="/tv/:id" component={TVDetail} />
         <Route exact path="/todo/movie/:status" component={TodoMovie} />

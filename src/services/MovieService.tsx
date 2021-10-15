@@ -18,9 +18,6 @@ const MovieService = {
       const res = await ApiMovieHelper({
         method: 'GET',
         url: `/3/movie/${movieId}`,
-        params: {
-          append_to_response: 'watch/providers',
-        },
       });
       return res.data;
     } catch (err) {
@@ -32,6 +29,18 @@ const MovieService = {
       const res = await ApiMovieHelper({
         method: 'GET',
         url: `/3/movie/${movieId}/watch/providers`,
+      });
+      return res.data;
+    } catch (err) {
+      return err.response.data;
+    }
+  },
+  discoverMovie: async (query: any) => {
+    try {
+      const res = await ApiMovieHelper({
+        method: 'GET',
+        url: `/3/discover/movie`,
+        params: query,
       });
       return res.data;
     } catch (err) {
