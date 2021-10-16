@@ -48,10 +48,22 @@ const DropdownTodo = (props: any) => {
         onChange={handleChangeList}
         className="border border-gray-300 rounded-full text-red-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none button-todo"
       >
-        <option value="">Choose watch type</option>
-        <option value="WATCHLIST">Watchlist</option>
-        <option value="WATCHED">Watched</option>
-        <option value="WATCHING">Watching</option>
+        {mediaType === 'movie' ? (
+          <>
+            <option value="">Choose watch type</option>
+            <option value="WATCHLIST">Watchlist</option>
+            <option value="WATCHED">Watched</option>
+            <option value="WATCHING">Watching</option>
+          </>
+        ) : (
+          <>
+            <option value="">Choose watch type</option>
+            <option value="WATCHLIST">Watchlist</option>
+            <option value="WATCHED">Watched</option>
+            <option value="WATCHING">Watching</option>
+            <option value="WAITING_NEXT_SEASON">Waiting Next Season</option>
+          </>
+        )}
       </select>
     </div>
   );

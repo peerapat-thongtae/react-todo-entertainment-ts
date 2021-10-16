@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { setLoadingPage } from 'store/actions/loader';
 
 const MovieList = (props: any) => {
-  const { getMovies, title } = props;
+  const { getMovies, title, mediaType } = props;
   const [movies, setMovies]: any = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -37,7 +37,11 @@ const MovieList = (props: any) => {
             {title}
           </h1>
         </div>
-        <MovieGrid movies={movies} page={currentPage} />
+        <MovieGrid
+          movies={movies}
+          page={currentPage}
+          mediaType={mediaType || 'movie'}
+        />
         <div className="flex justify-center mt-5">
           <button
             type="button"

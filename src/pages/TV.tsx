@@ -11,11 +11,11 @@ const TV = (props: any) => {
   useEffect(() => {
     props.setLoadingPage(true);
     TVService.getTVByType('popular').then((res) => {
-      setTVPopulars(res);
+      setTVPopulars(res.results);
     });
 
     TVService.getTVByType('top_rated').then((res) => {
-      setTVTopRated(res);
+      setTVTopRated(res.results);
       props.setLoadingPage(false);
     });
   }, [props]);
