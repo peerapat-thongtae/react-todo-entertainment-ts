@@ -8,7 +8,13 @@ const TodoMovie = (props: any) => {
   const getMovies = (query: any) => {
     return TodoService.getTodoMovieByStatus(status, query);
   };
-  return <MovieList getMovies={getMovies} title={`My Movie ${status}`} />;
+  return (
+    <MovieList
+      getMovies={getMovies}
+      title={`My Movie ${status}`}
+      mediaType="movie"
+    />
+  );
 };
 
 export default TodoMovie;
