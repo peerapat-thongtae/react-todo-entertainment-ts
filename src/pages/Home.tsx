@@ -16,23 +16,23 @@ const Home = (props: any) => {
   useEffect(() => {
     props.setLoadingPage(true);
     Promise.all([
-      TodoService.getMyMovieWatchlist().then((res) => {
-        setWatchlistMovies(res);
+      TodoService.getTodoMovieByStatus('watchlist').then((res) => {
+        setWatchlistMovies(res.results);
       }),
-      TodoService.getMyMovieWatched().then((res) => {
-        setWatchedMovies(res);
-      }),
-
-      TodoService.getTVWatchlist().then((res) => {
-        setWatchlistTV(res);
+      TodoService.getTodoMovieByStatus('watched').then((res) => {
+        setWatchedMovies(res.results);
       }),
 
-      TodoService.getTVWatching().then((res) => {
-        setWatchingTV(res);
+      TodoService.getTodoTVByStatus('watchlist').then((res) => {
+        setWatchlistTV(res.results);
       }),
 
-      TodoService.getTVWatched().then((res) => {
-        setWatchedTV(res);
+      TodoService.getTodoTVByStatus('watching').then((res) => {
+        setWatchingTV(res.results);
+      }),
+
+      TodoService.getTodoTVByStatus('watched').then((res) => {
+        setWatchedTV(res.results);
       }),
     ]).then(() => {
       props.setLoadingPage(false);

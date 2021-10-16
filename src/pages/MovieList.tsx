@@ -1,6 +1,8 @@
 import Layout from 'components/Layout';
 import MovieGrid from 'components/MovieGrid';
 import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { setLoadingPage } from 'store/actions/loader';
 
 const MovieList = (props: any) => {
   const { getMovies, title } = props;
@@ -8,19 +10,23 @@ const MovieList = (props: any) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
+    props.setLoadingPage(true);
     const query = {
       page: 1,
     };
     getMovies(query).then((res: any) => {
       setMovies(res.results);
+      props.setLoadingPage(false);
     });
-  }, [getMovies]);
+  }, [getMovies, props]);
 
   const loadmoreMovie = async () => {
+    props.setLoadingPage(true);
     setCurrentPage(currentPage + 1);
     // if (currentPage !== 1) {
     const result = await getMovies({ page: currentPage + 1 });
     setMovies([...movies, ...result.results]);
+    props.setLoadingPage(false);
     // }
   };
   return (
@@ -31,7 +37,7 @@ const MovieList = (props: any) => {
             {title}
           </h1>
         </div>
-        <MovieGrid movies={movies} />
+        <MovieGrid movies={movies} page={currentPage} />
         <div className="flex justify-center mt-5">
           <button
             type="button"
@@ -46,4 +52,4 @@ const MovieList = (props: any) => {
   );
 };
 
-export default MovieList;
+export default connect(null, { setLoadingPage })(MovieList);

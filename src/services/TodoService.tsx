@@ -1,6 +1,4 @@
 import { ApiTodoHelper } from 'utils/APIHelper';
-import MovieService from './MovieService';
-import TVService from './TVService';
 
 const TodoService = {
   addMediaTodo: async (mediaData: any) => {
@@ -22,12 +20,12 @@ const TodoService = {
         method: 'GET',
         url: `/todo/movie/watchlist`,
       });
-      const medias = Promise.all(
-        res.data.todos.map((todo: any) =>
-          MovieService.getMovieDetail(todo.mediaId)
-        )
-      );
-      return medias;
+      // const medias = Promise.all(
+      //   res.data.todos.map((todo: any) =>
+      //     MovieService.getMovieDetail(todo.mediaId)
+      //   )
+      // );
+      return res.data;
     } catch (err) {
       return err;
     }
@@ -39,12 +37,12 @@ const TodoService = {
         method: 'GET',
         url: `/todo/movie/watched`,
       });
-      const medias = Promise.all(
-        res.data.todos.map((todo: any) =>
-          MovieService.getMovieDetail(todo.mediaId)
-        )
-      );
-      return medias;
+      // const medias = Promise.all(
+      //   res.data.todos.map((todo: any) =>
+      //     MovieService.getMovieDetail(todo.mediaId)
+      //   )
+      // );
+      return res.data;
     } catch (err) {
       return err;
     }
@@ -56,10 +54,10 @@ const TodoService = {
         method: 'GET',
         url: `/todo/tv/watchlist`,
       });
-      const medias = Promise.all(
-        res.data.todos.map((todo: any) => TVService.getTVDetail(todo.mediaId))
-      );
-      return medias;
+      // const medias = Promise.all(
+      //   res.data.todos.map((todo: any) => TVService.getTVDetail(todo.mediaId))
+      // );
+      return res.data;
     } catch (err) {
       return err;
     }
@@ -71,10 +69,10 @@ const TodoService = {
         method: 'GET',
         url: `/todo/tv/watched`,
       });
-      const medias = Promise.all(
-        res.data.todos.map((todo: any) => TVService.getTVDetail(todo.mediaId))
-      );
-      return medias;
+      // const medias = Promise.all(
+      //   res.data.todos.map((todo: any) => TVService.getTVDetail(todo.mediaId))
+      // );
+      return res.data;
     } catch (err) {
       return err;
     }
@@ -87,12 +85,28 @@ const TodoService = {
         url: `/todo/movie/${status}`,
         params: query,
       });
-      const medias = await Promise.all(
-        res.data.todos.map((todo: any) =>
-          MovieService.getMovieDetail(todo.mediaId)
-        )
-      );
-      return { ...res.data, results: medias };
+      // const medias = await Promise.all(
+      //   res.data.todos.map((todo: any) =>
+      //     MovieService.getMovieDetail(todo.mediaId)
+      //   )
+      // );
+      return res.data;
+    } catch (err) {
+      return err;
+    }
+  },
+
+  getTodoTVByStatus: async (status: string, query = {}) => {
+    try {
+      const res = await ApiTodoHelper({
+        method: 'GET',
+        url: `/todo/tv/${status}`,
+        params: query,
+      });
+      // const medias = await Promise.all(
+      //   res.data.todos.map((todo: any) => TVService.getTVDetail(todo.mediaId))
+      // );
+      return res.data;
     } catch (err) {
       return err;
     }
@@ -104,10 +118,10 @@ const TodoService = {
         method: 'GET',
         url: `/todo/tv/watching`,
       });
-      const medias = Promise.all(
-        res.data.todos.map((todo: any) => TVService.getTVDetail(todo.mediaId))
-      );
-      return medias;
+      // const medias = Promise.all(
+      //   res.data.todos.map((todo: any) => TVService.getTVDetail(todo.mediaId))
+      // );
+      return res.data;
     } catch (err) {
       return err;
     }
