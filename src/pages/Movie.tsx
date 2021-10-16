@@ -1,5 +1,6 @@
 import Layout from 'components/Layout';
 import MovieSlider from 'components/MovieSlider';
+import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
@@ -7,6 +8,7 @@ import { toast } from 'react-toastify';
 import MovieService from 'services/MovieService';
 import { setLoadingPage } from 'store/actions/loader';
 import { setOpenModal } from 'store/actions/modal';
+import MovieHelper from 'utils/MovieHelper';
 
 const Movie = (props: any) => {
   const [moviePopulars, setMoviePopulars] = useState([]);
@@ -45,19 +47,29 @@ const Movie = (props: any) => {
     <Layout>
       <MovieSlider
         title="Popular"
-        endpoint="/movie/popular"
+        endpoint={`/movie/discover?${MovieHelper.objectToQueryString({
+          sort_by: 'popularity.desc',
+          'vote_count.gte': 500,
+        })}`}
         movies={moviePopulars}
         mediaType="movie"
       />
       <MovieSlider
         title="Upcoming"
-        endpoint="/movie/upcoming"
+        endpoint={`/movie/discover?${MovieHelper.objectToQueryString({
+          sort_by: 'popularity.desc',
+          'release_date.gte': dayjs().format('YYYY-MM-DD'),
+          'release_date.lte': dayjs().add(30, 'day').format('YYYY-MM-DD'),
+        })}`}
         movies={movieUpcomings}
         mediaType="movie"
       />
       <MovieSlider
         title="Top Rated"
-        endpoint="/movie/top_rated"
+        endpoint={`/movie/discover?${MovieHelper.objectToQueryString({
+          sort_by: 'vote_average.desc',
+          'vote_count.gte': 500,
+        })}`}
         movies={movieTopRated}
         mediaType="movie"
       />
