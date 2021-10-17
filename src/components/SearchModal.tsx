@@ -32,7 +32,7 @@ const ListSearch = (props: any) => {
 };
 
 const SearchModal = (props: any) => {
-  const { title, modal } = props;
+  const { title, modalSearchMulti } = props;
   const [searchText, setSearchText] = useState('');
   const [results, setResults] = useState([]);
   const [isSearching, setIsSearching] = useState(true);
@@ -50,8 +50,8 @@ const SearchModal = (props: any) => {
   };
 
   useEffect(() => {
-    setSearchText(modal.search);
-  }, [modal.search]);
+    setSearchText(modalSearchMulti.search);
+  }, [modalSearchMulti.search]);
 
   useEffect(
     () => {
@@ -62,10 +62,10 @@ const SearchModal = (props: any) => {
         setResults([]);
       }
     },
-    [modal.search, searchText] // Only call effect if debounced search term changes
+    [modalSearchMulti.search, searchText] // Only call effect if debounced search term changes
   );
   return (
-    <div className="overlay-content" hidden={!modal.open}>
+    <div className="overlay-content" hidden={!modalSearchMulti.open}>
       <div className="wrapper">
         <div className="w-full max-w-screen-xl mx-auto px-6">
           <div className="flex justify-center p-4 px-3 py-10">
@@ -125,7 +125,7 @@ const SearchModal = (props: any) => {
 const mapStateToProps = (state: any) => ({
   user: state.user,
   loader: state.loader,
-  modal: state.modalSearchMulti,
+  modalSearchMulti: state.modalSearchMulti,
 });
 
 export default connect(mapStateToProps, { setCloseModal })(SearchModal);

@@ -47,6 +47,17 @@ const MovieService = {
       return err.response.data;
     }
   },
+  getGenres: async () => {
+    try {
+      const res = await ApiMovieHelper({
+        method: 'GET',
+        url: `/3/genre/movie/list`,
+      });
+      return res.data;
+    } catch (err) {
+      return err.response.data;
+    }
+  },
 };
 
 export default MovieService;

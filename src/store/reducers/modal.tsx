@@ -13,3 +13,17 @@ export const modalSearchMulti = (state: any, action: any) => {
       return {};
   }
 };
+
+export const modalFilter = (state: any, action: any) => {
+  switch (action.type) {
+    case 'OPEN_MODAL_FILTER':
+      return {
+        open: true,
+        ...action.payload,
+      };
+    case 'CLOSE_MODAL_FILTER':
+      return { open: false, search: '' };
+    default:
+      return {};
+  }
+};

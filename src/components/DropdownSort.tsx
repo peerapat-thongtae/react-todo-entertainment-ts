@@ -9,6 +9,7 @@ const DropdownSort = (props: any) => {
     props.history.push(
       `${props.history.location.pathname}?${MovieHelper.objectToQueryString({
         ...queryObj,
+        'vote_count.gte': 200,
         sort_by: e.target.value,
       })}`
     );

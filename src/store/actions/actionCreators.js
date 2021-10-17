@@ -54,6 +54,19 @@ export function closeModal() {
   };
 }
 
+export function openModalFilter(payload) {
+  return {
+    type: 'OPEN_MODAL_FILTER',
+    payload,
+  };
+}
+
+export function closeModalFilter() {
+  return {
+    type: 'CLOSE_MODAL_FILTER',
+  };
+}
+
 export function searchTextModal(search) {
   return {
     search,

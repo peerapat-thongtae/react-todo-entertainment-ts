@@ -68,6 +68,7 @@
         "args": "none"
       }
     ],
+    "camelcase": "off",
     "react/no-array-index-key": "off",
     "max-len": [
       "warn",
