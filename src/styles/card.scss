@@ -27,3 +27,10 @@
   }
 }
 
+  .person-known-for {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  letter-spacing: $letter-spacing;
+}
+

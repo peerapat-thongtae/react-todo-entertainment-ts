@@ -5,6 +5,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import MovieCard from './MovieCard';
+import PersonCard from './PersonCard';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -71,6 +73,12 @@ export default function NavTabs() {
     setValue(newValue);
   };
 
+  const movies = [
+    {
+      name: 'Robert',
+    },
+  ];
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -87,8 +95,11 @@ export default function NavTabs() {
       </AppBar>
       <div className="">
         <TabPanel value={value} index={0}>
-          {/* <MovieCard /> */}
-          sssss
+          <div className="grid grid-cols-4 gap-3">
+            {movies.map((movie: any, index: number) => (
+              <PersonCard key={index} person={movie} />
+            ))}
+          </div>
         </TabPanel>
         <TabPanel value={value} index={1}>
           Page Two

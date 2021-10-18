@@ -34,11 +34,7 @@ const MovieDetail = (props: any) => {
             <img
               alt={movie.title}
               className="lg:w-1/2 w1/2 object-cover object-center rounded border border-gray-200 featured_image"
-              src={
-                movie.poster_path
-                  ? `${MovieHelper.posterPath(movie.poster_path)}`
-                  : '/poster/defaultposter.png'
-              }
+              src={`${MovieHelper.posterPath(movie.poster_path)}`}
             />
             <div className="lg:w-1/2 w-full lg:pl-16 lg:py-6 mt-6 lg:mt-0">
               <h1 className="text-gray-900 text-2xl font-bold title-font font-medium mb-1">

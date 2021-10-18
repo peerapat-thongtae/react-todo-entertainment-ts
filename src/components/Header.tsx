@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import DropdownProfile from './DropdownProfile';
+import NavLeftMenu from './NavLeftMenu';
 import SearchNavbar from './SearchNavbar';
 
 const Header = (props: any) => {
@@ -19,33 +20,7 @@ const Header = (props: any) => {
               </span>
             </span>
           </Link>
-
-          <ul className="flex items-center flex-1 space-x-4 text-sm">
-            <li className="mt-3 md:ml-16 md:mt-0">
-              <Link to="/movie">
-                <span
-                  className={`tracking-wide uppercase link-to
-                    font-bold
-                    ${props.location.pathname === '/movie' && 'text-orange-500'}
-                `}
-                >
-                  Movies
-                </span>
-              </Link>
-            </li>
-            <li className="mt-3 md:ml-16 md:mt-0">
-              <Link to="/tv">
-                <span
-                  className={`tracking-wide uppercase link-to
-                    font-bold
-                    ${props.location.pathname === '/tv' && 'text-orange-500'}
-                `}
-                >
-                  TV
-                </span>
-              </Link>
-            </li>
-          </ul>
+          <NavLeftMenu />
           <div className="relative z-50 mt-3 md:mt-0">
             <ul className="flex items-center flex-1 space-x-4 text-sm">
               <li className="mt-3 md:ml-6 md:mt-0">

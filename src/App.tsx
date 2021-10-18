@@ -24,6 +24,7 @@ import TVTopRated from 'pages/TVTopRated';
 import TVPopular from 'pages/TVPopular';
 import TodoTV from 'pages/TodoTV';
 import NavTabs from 'components/TabPanel';
+import Person from 'pages/Person';
 
 function App(props: any) {
   useEffect(() => {
@@ -52,6 +53,7 @@ function App(props: any) {
         <Route exact path="/todo/movie/:status" component={TodoMovie} />
         <Route exact path="/todo/tv/:status" component={TodoTV} />
         <Route exact path="/test" component={NavTabs} />
+        <Route exact path="/person" component={Person} />
       </Switch>
     </>
   );
