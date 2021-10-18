@@ -10,7 +10,7 @@ const Layout = ({ children, loader, modal }: any) => {
   return (
     <>
       <LoadingPage show={loader.isLoading} />
-      <main className="md:pt-32 sm:px-4">
+      <main className="md:pt-32 ">
         <Header />
         {children}
       </main>

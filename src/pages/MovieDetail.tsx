@@ -7,6 +7,7 @@ import MovieService from 'services/MovieService';
 import MovieHelper from 'utils/MovieHelper';
 import { setLoadingPage } from 'store/actions/loader';
 import Tag from 'components/Tag';
+import TabPanel from 'components/TabPanel';
 
 const MovieDetail = (props: any) => {
   const movieId = props.match.params.id;
@@ -141,6 +142,7 @@ const MovieDetail = (props: any) => {
           </div>
         </div>
       </section>
+      <TabPanel />
     </Layout>
   );
 };
