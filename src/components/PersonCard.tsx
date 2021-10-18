@@ -36,8 +36,7 @@ const PersonCard = (props: any) => {
             <b>
               Known for:{' '}
               <Link
-                to={`/
-                ${person.known_for[0].media_type}/${person.known_for[0].id}`}
+                to={`/${person.known_for[0].media_type}/${person.known_for[0].id}`}
                 className="hover:text-orange-500"
               >
                 {person.known_for[0].name || person.known_for[0].title || '-'}
