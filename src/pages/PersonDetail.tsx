@@ -1,44 +1,38 @@
-import DropdownTodo from 'components/DropdownTodo';
 import Layout from 'components/Layout';
 import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import MovieService from 'services/MovieService';
-import MovieHelper from 'utils/MovieHelper';
+import PersonService from 'services/PersonService';
+import PersonHelper from 'utils/PersonHelper';
 import { setLoadingPage } from 'store/actions/loader';
-import Tag from 'components/Tag';
 import TabPanel from 'components/TabPanel';
 
-const MovieDetail = (props: any) => {
-  const movieId = props.match.params.id;
-  const [movie, setMovie]: any = useState({});
-  const [watchProviders, setWatchProviders]: any = useState([]);
+const PersonDetail = (props: any) => {
+  const personId = props.match.params.id;
+  const [person, setPerson]: any = useState({});
   useEffect(() => {
     props.setLoadingPage(true);
     Promise.all([
-      MovieService.getMovieDetail(movieId).then((res) => {
-        setMovie(res);
-      }),
-      MovieService.getMovieWatchProviders(movieId).then((res) => {
-        setWatchProviders((res.results.TH && res.results.TH.flatrate) || null);
+      PersonService.getPersonDetail(personId).then((res: any) => {
+        setPerson(res);
       }),
     ]).finally(() => {
       props.setLoadingPage(false);
     });
-  }, [movieId, props, props.setLoadingPage]);
+  }, [personId, props, props.setLoadingPage]);
   return (
     <Layout>
       <section className="text-gray-700 body-font overflow-hidden justify-center">
         <div className=" px-5 py-12 mx-auto">
-          <div className="lg:w-3/5 mx-auto flex flex-wrap">
+          <div className="lg:w-2/4 mx-auto flex flex-wrap">
             <img
-              alt={movie.title}
+              alt={person.name}
               className="lg:w-1/2 w1/2 object-cover object-center rounded border border-gray-200 featured_image"
-              src={`${MovieHelper.posterPath(movie.poster_path)}`}
+              src={`${PersonHelper.posterPath(person.profile_path)}`}
             />
             <div className="lg:w-1/2 w-full lg:pl-16 lg:py-6 mt-6 lg:mt-0">
               <h1 className="text-gray-900 text-2xl font-bold title-font font-medium mb-1">
-                {movie.title}
+                {person.name}
               </h1>
               {/* <h2 className="text-sm ml-4 title-font text-gray-500 tracking-widest">
                 BRAND NAME
@@ -46,12 +40,7 @@ const MovieDetail = (props: any) => {
               <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
                 <span className="flex items-center">
                   <span className="text-gray-600 ml-3">
-                    {dayjs(movie.release_date).format('DD MMM YYYY')}
-                  </span>
-                </span>
-                <span className="flex items-center ml-3 border-l-2 border-gray-200">
-                  <span className="text-gray-600 ml-3">
-                    {movie.vote_average}/10
+                    {person.known_for_department}
                   </span>
                 </span>
                 <span className="flex ml-3 pl-3 py-2 border-l-2 border-gray-200">
@@ -94,49 +83,22 @@ const MovieDetail = (props: any) => {
                 </span>
               </div>
               <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
-                <p className="leading-relaxed ">{movie.overview}</p>
-              </div>
-              <div className="flex justify-center mb-4 pb-5 border-b-2 border-gray-200 mb-5 w-full">
-                <p className="leading-relaxed w-full">
-                  <DropdownTodo media={movie} mediaType="movie" />
+                <p className="leading-relaxed ">
+                  <b>Birth date : </b>
+                  {dayjs(person.birthday).format('DD MMM YYYY')}
                 </p>
               </div>
               <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
-                <span className="">
-                  <div>
-                    {movie.genres &&
-                      movie.genres.map((genre: any, index: number) => {
-                        return (
-                          <>
-                            <Tag
-                              key={index}
-                              to={`/movie/discover?with_genres=${genre.id}`}
-                              title={genre.name}
-                            />
-                          </>
-                        );
-                      })}
-                  </div>
-                </span>
+                <p className="leading-relaxed ">
+                  <b>Age : </b>
+                  {PersonHelper.calculateAge(person.birthday)} Years
+                </p>
               </div>
               <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
-                <span className="">
-                  <div>
-                    {watchProviders ? (
-                      watchProviders.map((flatrate: any, index: number) => {
-                        return (
-                          <Tag
-                            key={index}
-                            title={flatrate.provider_name}
-                            to={`/movie/discover?with_watch_providers=${flatrate.provider_id}`}
-                          />
-                        );
-                      })
-                    ) : (
-                      <div>No Streaming In TH</div>
-                    )}
-                  </div>
-                </span>
+                <p className="leading-relaxed ">
+                  <b>Place of birth : </b>
+                  {person.place_of_birth}
+                </p>
               </div>
             </div>
           </div>
@@ -147,4 +109,4 @@ const MovieDetail = (props: any) => {
   );
 };
 
-export default connect(null, { setLoadingPage })(MovieDetail);
+export default connect(null, { setLoadingPage })(PersonDetail);

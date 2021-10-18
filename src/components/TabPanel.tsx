@@ -96,9 +96,9 @@ export default function NavTabs() {
       <div className="">
         <TabPanel value={value} index={0}>
           <div className="grid grid-cols-4 gap-3">
-            {movies.map((movie: any, index: number) => (
+            {/* {movies.map((movie: any, index: number) => (
               <PersonCard key={index} person={movie} />
-            ))}
+            ))} */}
           </div>
         </TabPanel>
         <TabPanel value={value} index={1}>

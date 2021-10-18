@@ -76,11 +76,11 @@ const FilterModal = (props: any) => {
                         type="date"
                         name="release_date_from"
                         id="release_date_from"
-                        defaultValue={queryFilter['release_date.gte']}
+                        defaultValue={queryFilter['primary_release_date.gte']}
                         onChange={(e) => {
                           setQueryFilter({
                             ...queryFilter,
-                            'release_date.gte': e.target.value,
+                            'primary_release_date.gte': e.target.value,
                           });
                         }}
                       />
@@ -97,11 +97,11 @@ const FilterModal = (props: any) => {
                         type="date"
                         name="release_date_to"
                         id="release_date_to"
-                        defaultValue={queryFilter['release_date.lte']}
+                        defaultValue={queryFilter['primary_release_date.lte']}
                         onChange={(e) => {
                           setQueryFilter({
                             ...queryFilter,
-                            'release_date.lte': e.target.value,
+                            'primary_release_date.lte': e.target.value,
                           });
                         }}
                       />

@@ -13,6 +13,17 @@ const PersonService = {
       return err.response.data;
     }
   },
+  getPersonDetail: async (personId: number) => {
+    try {
+      const res = await ApiMovieHelper({
+        method: 'GET',
+        url: `/3/person/${personId}`,
+      });
+      return res.data;
+    } catch (err) {
+      return err.response.data;
+    }
+  },
 };
 
 export default PersonService;
