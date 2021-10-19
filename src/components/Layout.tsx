@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import ReactTooltip from 'react-tooltip';
 import FilterModal from './FilterModal';
 import Header from './Header';
 import LoadingPage from './LoadingPage';
@@ -12,6 +13,7 @@ const Layout = ({ children, loader, modal }: any) => {
       <LoadingPage show={loader.isLoading} />
       <main className="md:pt-32 ">
         <Header />
+
         {children}
       </main>
       <SearchModal />
