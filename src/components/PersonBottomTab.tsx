@@ -4,8 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
-import CastTab from './CastTab';
-import CreatorTab from './CreatorTab';
+import { Person } from '@material-ui/icons';
 import MovieTab from './MovieTab';
 
 interface TabPanelProps {
@@ -60,13 +59,23 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function NavTabs(props: any) {
+export default function PersonBottomTab(props: any) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-  const casts = props.movie && props.movie.credits && props.movie.credits.cast;
-  const crews = props.movie && props.movie.credits && props.movie.credits.crew;
-  const movies =
-    props.movie && props.movie.similar && props.movie.similar.results;
+  const cast_movies =
+    props.person &&
+    props.person.movie_credits &&
+    props.person.movie_credits.cast;
+  const cast_tv =
+    props.person && props.person.tv_credits && props.person.tv_credits.cast;
+
+  const crew_movies =
+    props.person &&
+    props.person.movie_credits &&
+    props.person.movie_credits.crew;
+
+  const crew_tv =
+    props.person && props.person.tv_credits && props.person.tv_credits.crew;
 
   const handleChange = (event: React.ChangeEvent<any>, newValue: number) => {
     setValue(newValue);
@@ -81,20 +90,26 @@ export default function NavTabs(props: any) {
           onChange={handleChange}
           aria-label="nav tabs example"
         >
-          <LinkTab label="Cast" {...a11yProps(0)} />
-          <LinkTab label="Creator" {...a11yProps(1)} />
-          <LinkTab label="Similar" {...a11yProps(2)} />
+          <LinkTab label="Movies" {...a11yProps(0)} />
+          <LinkTab label="TV" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
       <div className="">
         <TabPanel value={value} index={0}>
-          <CastTab casts={casts} />
+          <MovieTab
+            movies={
+              props.person.known_for_department === 'Acting'
+                ? cast_movies
+                : crew_movies
+            }
+          />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <CreatorTab crews={crews} />
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          <MovieTab movies={movies} />
+          <MovieTab
+            movies={
+              props.person.known_for_department === 'Acting' ? cast_tv : crew_tv
+            }
+          />
         </TabPanel>
       </div>
     </div>

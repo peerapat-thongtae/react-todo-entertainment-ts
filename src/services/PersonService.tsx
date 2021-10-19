@@ -18,6 +18,9 @@ const PersonService = {
       const res = await ApiMovieHelper({
         method: 'GET',
         url: `/3/person/${personId}`,
+        params: {
+          append_to_response: 'movie_credits,tv_credits',
+        },
       });
       return res.data;
     } catch (err) {

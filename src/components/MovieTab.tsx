@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import MovieHelper from 'utils/MovieHelper';
 
-const SimilarMovieTab = (props: any) => {
+const MovieTab = (props: any) => {
   const { movies } = props;
   return (
     <section id="top_movies" className="clearfix">
@@ -19,7 +19,7 @@ const SimilarMovieTab = (props: any) => {
                         className="lazyload"
                       />
                     </div>
-                    <h3 className="cast_name">{movie.title}</h3>
+                    <h3 className="cast_name">{movie.title || movie.name}</h3>
                   </Link>
                 </div>
               );
@@ -30,4 +30,4 @@ const SimilarMovieTab = (props: any) => {
   );
 };
 
-export default SimilarMovieTab;
+export default MovieTab;

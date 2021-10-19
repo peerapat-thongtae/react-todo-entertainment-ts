@@ -6,6 +6,7 @@ import PersonService from 'services/PersonService';
 import PersonHelper from 'utils/PersonHelper';
 import { setLoadingPage } from 'store/actions/loader';
 import TabPanel from 'components/TabPanel';
+import PersonBottomTab from 'components/PersonBottomTab';
 
 const PersonDetail = (props: any) => {
   const personId = props.match.params.id;
@@ -104,7 +105,7 @@ const PersonDetail = (props: any) => {
           </div>
         </div>
       </section>
-      <TabPanel />
+      <PersonBottomTab person={person} />
     </Layout>
   );
 };
