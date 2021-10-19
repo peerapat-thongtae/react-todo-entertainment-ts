@@ -5,6 +5,12 @@ const MovieHelper = {
     }
     return `https://www.themoviedb.org/t/p/w600_and_h900_bestv2${path}`;
   },
+  logoPath: (path: string) => {
+    if (!path) {
+      return '/poster/defaultoister,ong';
+    }
+    return `https://www.themoviedb.org/t/p/original${path}`;
+  },
   paramsToObject: (queryString: any) => {
     const params = new URLSearchParams(queryString);
     const entries: any = params.entries();

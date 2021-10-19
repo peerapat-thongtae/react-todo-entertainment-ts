@@ -8,6 +8,7 @@ import MovieHelper from 'utils/MovieHelper';
 import { setLoadingPage } from 'store/actions/loader';
 import Tag from 'components/Tag';
 import TabPanel from 'components/TabPanel';
+import WatchProviderTag from 'components/WatchProviderTag';
 
 const MovieDetail = (props: any) => {
   const movieId = props.match.params.id;
@@ -125,9 +126,9 @@ const MovieDetail = (props: any) => {
                     {watchProviders ? (
                       watchProviders.map((flatrate: any, index: number) => {
                         return (
-                          <Tag
+                          <WatchProviderTag
                             key={index}
-                            title={flatrate.provider_name}
+                            imagePath={MovieHelper.logoPath(flatrate.logo_path)}
                             to={`/movie/discover?with_ott_providers=${flatrate.provider_id}&ott_region=TH`}
                           />
                         );
@@ -142,7 +143,7 @@ const MovieDetail = (props: any) => {
           </div>
         </div>
       </section>
-      <TabPanel />
+      <TabPanel movie={movie} />
     </Layout>
   );
 };

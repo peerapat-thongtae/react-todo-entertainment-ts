@@ -1,12 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import MovieCard from './MovieCard';
-import PersonCard from './PersonCard';
+import CastTab from './CastTab';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -16,7 +14,6 @@ interface TabPanelProps {
 
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
-
   return (
     <div
       role="tabpanel"
@@ -25,11 +22,7 @@ function TabPanel(props: TabPanelProps) {
       aria-labelledby={`nav-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box p={8}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box p={4}>{children}</Box>}
     </div>
   );
 }
@@ -65,19 +58,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function NavTabs() {
+export default function NavTabs(props: any) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const casts = props.movie && props.movie.credits && props.movie.credits.cast;
 
   const handleChange = (event: React.ChangeEvent<any>, newValue: number) => {
     setValue(newValue);
   };
-
-  const movies = [
-    {
-      name: 'Robert',
-    },
-  ];
 
   return (
     <div className={classes.root}>
@@ -95,11 +83,7 @@ export default function NavTabs() {
       </AppBar>
       <div className="">
         <TabPanel value={value} index={0}>
-          <div className="grid grid-cols-4 gap-3">
-            {/* {movies.map((movie: any, index: number) => (
-              <PersonCard key={index} person={movie} />
-            ))} */}
-          </div>
+          <CastTab casts={casts} />
         </TabPanel>
         <TabPanel value={value} index={1}>
           Page Two
