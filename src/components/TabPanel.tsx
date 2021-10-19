@@ -5,6 +5,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import CastTab from './CastTab';
+import CreatorTab from './CreatorTab';
+import SimilarMovieTab from './SimilarMovieTab';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -62,6 +64,9 @@ export default function NavTabs(props: any) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const casts = props.movie && props.movie.credits && props.movie.credits.cast;
+  const crews = props.movie && props.movie.credits && props.movie.credits.crew;
+  const movies =
+    props.movie && props.movie.similar && props.movie.similar.results;
 
   const handleChange = (event: React.ChangeEvent<any>, newValue: number) => {
     setValue(newValue);
@@ -86,10 +91,10 @@ export default function NavTabs(props: any) {
           <CastTab casts={casts} />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          Page Two
+          <CreatorTab crews={crews} />
         </TabPanel>
         <TabPanel value={value} index={2}>
-          Page Three
+          <SimilarMovieTab movies={movies} />
         </TabPanel>
       </div>
     </div>

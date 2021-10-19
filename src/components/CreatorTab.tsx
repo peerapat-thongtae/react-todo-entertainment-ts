@@ -2,14 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import MovieHelper from 'utils/MovieHelper';
 
-const CastTab = (props: any) => {
-  const casts = props.casts || [];
+const CreatorTab = (props: any) => {
+  const crews = props.crews || [];
   return (
     <section id="top_movies" className="clearfix">
       <div className="wrapper">
         <div className="grid grid-cols-6 gap-8 row">
-          {casts &&
-            casts.map((cast: any, index: number) => {
+          {crews &&
+            crews.map((cast: any, index: number) => {
               return (
                 <div key={index} className="post">
                   <Link to={`/person/${cast.id}`}>
@@ -20,7 +20,7 @@ const CastTab = (props: any) => {
                       />
                     </div>
                     <h3 className="cast_name">{cast.name}</h3>
-                    <p className="post_info">{cast.character}</p>
+                    <p className="post_info">{cast.job}</p>
                   </Link>
                 </div>
               );
@@ -31,4 +31,4 @@ const CastTab = (props: any) => {
   );
 };
 
-export default CastTab;
+export default CreatorTab;

@@ -2,25 +2,24 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import MovieHelper from 'utils/MovieHelper';
 
-const CastTab = (props: any) => {
-  const casts = props.casts || [];
+const SimilarMovieTab = (props: any) => {
+  const { movies } = props;
   return (
     <section id="top_movies" className="clearfix">
       <div className="wrapper">
         <div className="grid grid-cols-6 gap-8 row">
-          {casts &&
-            casts.map((cast: any, index: number) => {
+          {movies &&
+            movies.map((movie: any, index: number) => {
               return (
                 <div key={index} className="post">
-                  <Link to={`/person/${cast.id}`}>
-                    <div className="card__img">
+                  <Link to={`/movie/${movie.id}`}>
+                    <div className="card__img mb-2">
                       <img
-                        src={MovieHelper.posterPath(cast.profile_path)}
+                        src={MovieHelper.posterPath(movie.poster_path)}
                         className="lazyload"
                       />
                     </div>
-                    <h3 className="cast_name">{cast.name}</h3>
-                    <p className="post_info">{cast.character}</p>
+                    <h3 className="cast_name">{movie.title}</h3>
                   </Link>
                 </div>
               );
@@ -31,4 +30,4 @@ const CastTab = (props: any) => {
   );
 };
 
-export default CastTab;
+export default SimilarMovieTab;

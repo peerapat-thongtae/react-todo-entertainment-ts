@@ -9,11 +9,23 @@ import { setLoadingPage } from 'store/actions/loader';
 import Tag from 'components/Tag';
 import TabPanel from 'components/TabPanel';
 import WatchProviderTag from 'components/WatchProviderTag';
+import { Link } from 'react-router-dom';
 
 const MovieDetail = (props: any) => {
   const movieId = props.match.params.id;
   const [movie, setMovie]: any = useState({});
   const [watchProviders, setWatchProviders]: any = useState([]);
+
+  const director = () => {
+    const arr = movie.credits && movie.credits.crew;
+    if (arr) {
+      const find = arr.find((o: any) => o.job === 'Director');
+      if (find) {
+        return find;
+      }
+    }
+    return {};
+  };
   useEffect(() => {
     props.setLoadingPage(true);
     Promise.all([
@@ -93,6 +105,16 @@ const MovieDetail = (props: any) => {
                     </svg>
                   </a>
                 </span>
+              </div>
+              <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
+                <p className="leading-relaxed ">
+                  <b>Director : </b>
+                  <Link to={`/person/${director().id}`}>
+                    <span className="hover:text-orange-500">
+                      {director().name}
+                    </span>
+                  </Link>
+                </p>
               </div>
               <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
                 <p className="leading-relaxed ">{movie.overview}</p>
