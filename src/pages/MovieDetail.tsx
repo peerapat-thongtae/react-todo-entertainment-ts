@@ -128,7 +128,7 @@ const MovieDetail = (props: any) => {
                           <Tag
                             key={index}
                             title={flatrate.provider_name}
-                            to={`/movie/discover?with_watch_providers=${flatrate.provider_id}`}
+                            to={`/movie/discover?with_ott_providers=${flatrate.provider_id}&ott_region=TH`}
                           />
                         );
                       })
