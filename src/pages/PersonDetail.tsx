@@ -5,14 +5,18 @@ import { connect } from 'react-redux';
 import PersonService from 'services/PersonService';
 import PersonHelper from 'utils/PersonHelper';
 import { setLoadingPage } from 'store/actions/loader';
-import TabPanel from 'components/TabPanel';
 import PersonBottomTab from 'components/PersonBottomTab';
+import { animateScroll as scroll } from 'react-scroll';
 
 const PersonDetail = (props: any) => {
   const personId = props.match.params.id;
   const [person, setPerson]: any = useState({});
   useEffect(() => {
     props.setLoadingPage(true);
+    scroll.scrollToTop({
+      smooth: true,
+      delay: 500,
+    });
     Promise.all([
       PersonService.getPersonDetail(personId).then((res: any) => {
         setPerson(res);

@@ -10,6 +10,7 @@ import Tag from 'components/Tag';
 import TabPanel from 'components/TabPanel';
 import WatchProviderTag from 'components/WatchProviderTag';
 import { Link } from 'react-router-dom';
+import { animateScroll as scroll } from 'react-scroll';
 
 const MovieDetail = (props: any) => {
   const movieId = props.match.params.id;
@@ -28,6 +29,10 @@ const MovieDetail = (props: any) => {
   };
   useEffect(() => {
     props.setLoadingPage(true);
+    scroll.scrollToTop({
+      smooth: true,
+      delay: 500,
+    });
     Promise.all([
       MovieService.getMovieDetail(movieId).then((res) => {
         setMovie(res);
@@ -165,7 +170,7 @@ const MovieDetail = (props: any) => {
           </div>
         </div>
       </section>
-      <TabPanel movie={movie} />
+      <TabPanel movie={movie} mediaType="movie" />
     </Layout>
   );
 };

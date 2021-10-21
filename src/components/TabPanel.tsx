@@ -84,6 +84,7 @@ export default function NavTabs(props: any) {
           <LinkTab label="Cast" {...a11yProps(0)} />
           <LinkTab label="Creator" {...a11yProps(1)} />
           <LinkTab label="Similar" {...a11yProps(2)} />
+          <LinkTab label="Videos" {...a11yProps(3)} />
         </Tabs>
       </AppBar>
       <div className="">
@@ -94,7 +95,10 @@ export default function NavTabs(props: any) {
           <CreatorTab crews={crews} />
         </TabPanel>
         <TabPanel value={value} index={2}>
-          <MovieTab movies={movies} />
+          <MovieTab movies={movies} mediaType={props.mediaType} />
+        </TabPanel>
+        <TabPanel value={value} index={3}>
+          <MovieTab movies={movies} mediaType={props.mediaType} />
         </TabPanel>
       </div>
     </div>

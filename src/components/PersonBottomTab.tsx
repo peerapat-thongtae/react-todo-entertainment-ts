@@ -4,7 +4,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
-import { Person } from '@material-ui/icons';
 import MovieTab from './MovieTab';
 
 interface TabPanelProps {
@@ -102,6 +101,7 @@ export default function PersonBottomTab(props: any) {
                 ? cast_movies
                 : crew_movies
             }
+            mediaType="movie"
           />
         </TabPanel>
         <TabPanel value={value} index={1}>
@@ -109,6 +109,7 @@ export default function PersonBottomTab(props: any) {
             movies={
               props.person.known_for_department === 'Acting' ? cast_tv : crew_tv
             }
+            mediaType="tv"
           />
         </TabPanel>
       </div>

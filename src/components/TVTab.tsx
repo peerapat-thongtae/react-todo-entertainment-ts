@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import MovieHelper from 'utils/MovieHelper';
 
-const MovieTab = (props: any) => {
-  const { movies, mediaType } = props;
+const TVTab = (props: any) => {
+  const { movies } = props;
   return (
     <section id="top_movies" className="clearfix">
       <div className="wrapper">
@@ -12,7 +12,7 @@ const MovieTab = (props: any) => {
             movies.map((movie: any, index: number) => {
               return (
                 <div key={index} className="post">
-                  <Link to={`/${mediaType}/${movie.id}`}>
+                  <Link to={`/tv/${movie.id}`}>
                     <div className="card__img mb-2">
                       <img
                         src={MovieHelper.posterPath(movie.poster_path)}
@@ -30,4 +30,4 @@ const MovieTab = (props: any) => {
   );
 };
 
-export default MovieTab;
+export default TVTab;

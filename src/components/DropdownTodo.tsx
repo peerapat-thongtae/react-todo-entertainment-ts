@@ -53,7 +53,6 @@ const DropdownTodo = (props: any) => {
             <option value="">Choose watch type</option>
             <option value="WATCHLIST">Watchlist</option>
             <option value="WATCHED">Watched</option>
-            <option value="WATCHING">Watching</option>
           </>
         ) : (
           <>

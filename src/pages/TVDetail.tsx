@@ -7,11 +7,16 @@ import { connect } from 'react-redux';
 import TVService from 'services/TVService';
 import MovieHelper from 'utils/MovieHelper';
 import { setLoadingPage } from 'store/actions/loader';
+import { Link } from 'react-router-dom';
+import WatchProviderTag from 'components/WatchProviderTag';
+import TabPanel from 'components/TabPanel';
 
 const TVDetail = (props: any) => {
   const movieId = props.match.params.id;
   const [movie, setMovie]: any = useState({});
   const [watchProviders, setWatchProviders] = useState([]);
+
+  const created_by = movie.created_by && movie.created_by[0];
   useEffect(() => {
     props.setLoadingPage(true);
     Promise.all([
@@ -94,6 +99,16 @@ const TVDetail = (props: any) => {
                 </span>
               </div>
               <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
+                <p className="leading-relaxed ">
+                  <b>Director : </b>
+                  <Link to={`/person/${created_by && created_by.id}}`}>
+                    <span className="hover:text-orange-500">
+                      {created_by && created_by.name}
+                    </span>
+                  </Link>
+                </p>
+              </div>
+              <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
                 <p className="leading-relaxed ">{movie.overview}</p>
               </div>
               <div className="flex justify-center mb-4 pb-5 border-b-2 border-gray-200 mb-5 w-full">
@@ -125,7 +140,11 @@ const TVDetail = (props: any) => {
                     {watchProviders ? (
                       watchProviders.map((flatrate: any, index: number) => {
                         return (
-                          <Tag key={index} title={flatrate.provider_name} />
+                          <WatchProviderTag
+                            key={index}
+                            imagePath={MovieHelper.logoPath(flatrate.logo_path)}
+                            to={`/movie/discover?with_ott_providers=${flatrate.provider_id}&ott_region=TH`}
+                          />
                         );
                       })
                     ) : (
@@ -138,6 +157,7 @@ const TVDetail = (props: any) => {
           </div>
         </div>
       </section>
+      <TabPanel movie={movie} mediaType="tv" />
     </Layout>
   );
 };

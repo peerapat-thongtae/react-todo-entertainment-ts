@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import MovieHelper from 'utils/MovieHelper';
 import dayjs from 'dayjs';
 import { connect } from 'react-redux';
-import ReactTooltip from 'react-tooltip';
 import DropdownTodo from './DropdownTodo';
 
 const MovieCard = (props: any) => {
@@ -11,8 +10,6 @@ const MovieCard = (props: any) => {
 
   return (
     <div className="justify-center items-center">
-      <ReactTooltip />
-
       <div className="container mx-auto max-w-xs rounded-lg overflow-hidden shadow-lg my-2 bg-white ">
         <div
           className="relative mb-6 card-img"
