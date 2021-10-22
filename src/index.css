@@ -75,3 +75,12 @@ code {
   -moz-box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.47);
   box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.47);
 }
+
+.gallery {
+  display: flex;
+}
+
+.pic {
+  cursor: pointer;
+  margin-right: 18px;
+}

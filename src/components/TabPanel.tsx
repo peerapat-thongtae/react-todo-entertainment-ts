@@ -7,6 +7,7 @@ import Box from '@material-ui/core/Box';
 import CastTab from './CastTab';
 import CreatorTab from './CreatorTab';
 import MovieTab from './MovieTab';
+import VideoTab from './VideoTab';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -98,7 +99,7 @@ export default function NavTabs(props: any) {
           <MovieTab movies={movies} mediaType={props.mediaType} />
         </TabPanel>
         <TabPanel value={value} index={3}>
-          <MovieTab movies={movies} mediaType={props.mediaType} />
+          <VideoTab />
         </TabPanel>
       </div>
     </div>

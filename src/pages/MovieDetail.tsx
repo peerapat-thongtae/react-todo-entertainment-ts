@@ -58,9 +58,6 @@ const MovieDetail = (props: any) => {
               <h1 className="text-gray-900 text-2xl font-bold title-font font-medium mb-1">
                 {movie.title}
               </h1>
-              {/* <h2 className="text-sm ml-4 title-font text-gray-500 tracking-widest">
-                BRAND NAME
-              </h2> */}
               <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
                 <span className="flex items-center">
                   <span className="text-gray-600 ml-3">
@@ -121,15 +118,13 @@ const MovieDetail = (props: any) => {
                   </Link>
                 </p>
               </div>
-              <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
+              {/* <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
                 <p className="leading-relaxed ">{movie.overview}</p>
-              </div>
-              <div className="flex justify-center mb-4 pb-5 border-b-2 border-gray-200 mb-5 w-full">
-                <p className="leading-relaxed w-full">
-                  <DropdownTodo media={movie} mediaType="movie" />
-                </p>
-              </div>
+              </div> */}
               <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
+                <span className="mr-4">
+                  <b>Genre </b>
+                </span>
                 <span className="">
                   <div>
                     {movie.genres &&
@@ -148,7 +143,33 @@ const MovieDetail = (props: any) => {
                 </span>
               </div>
               <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
+                <span className="mr-4">
+                  <b>Companies </b>
+                </span>
                 <span className="">
+                  <div>
+                    {movie.production_companies &&
+                      movie.production_companies.map(
+                        (company: any, index: number) => {
+                          return (
+                            <>
+                              <Tag
+                                key={index}
+                                to={`/movie/discover?with_companies=${company.id}`}
+                                title={company.name}
+                              />
+                            </>
+                          );
+                        }
+                      )}
+                  </div>
+                </span>
+              </div>
+              <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
+                <span className="">
+                  <b>Watch Providers (TH) : </b>
+                </span>
+                <span className="ml-2">
                   <div>
                     {watchProviders ? (
                       watchProviders.map((flatrate: any, index: number) => {
@@ -161,10 +182,15 @@ const MovieDetail = (props: any) => {
                         );
                       })
                     ) : (
-                      <div>No Streaming In TH</div>
+                      <div> No Streaming In TH</div>
                     )}
                   </div>
                 </span>
+              </div>
+              <div className="flex justify-center mb-4 pb-5 border-b-2 border-gray-200 mb-5 w-full">
+                <p className="leading-relaxed w-full">
+                  <DropdownTodo media={movie} mediaType="movie" />
+                </p>
               </div>
             </div>
           </div>
