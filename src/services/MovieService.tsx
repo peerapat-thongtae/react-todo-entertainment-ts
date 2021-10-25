@@ -18,7 +18,7 @@ const MovieService = {
       const res = await ApiMovieHelper({
         method: 'GET',
         url: `/3/movie/${movieId}`,
-        params: { append_to_response: 'credits,similar,videos' },
+        params: { append_to_response: 'credits,similar,videos,keywords' },
       });
       return res.data;
     } catch (err) {

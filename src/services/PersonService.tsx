@@ -19,7 +19,7 @@ const PersonService = {
         method: 'GET',
         url: `/3/person/${personId}`,
         params: {
-          append_to_response: 'movie_credits,tv_credits',
+          append_to_response: 'movie_credits,tv_credits,images',
         },
       });
       return res.data;

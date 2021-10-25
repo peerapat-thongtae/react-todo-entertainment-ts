@@ -5,6 +5,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import MovieTab from './MovieTab';
+import PersonImageTab from './PersonImagetab';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -76,6 +77,12 @@ export default function PersonBottomTab(props: any) {
   const crew_tv =
     props.person && props.person.tv_credits && props.person.tv_credits.crew;
 
+  const images =
+    props.person &&
+    props.person.images &&
+    props.person.images.profiles &&
+    props.person.images.profiles;
+
   const handleChange = (event: React.ChangeEvent<any>, newValue: number) => {
     setValue(newValue);
   };
@@ -91,6 +98,7 @@ export default function PersonBottomTab(props: any) {
         >
           <LinkTab label="Movies" {...a11yProps(0)} />
           <LinkTab label="TV" {...a11yProps(1)} />
+          <LinkTab label="Images" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <div className="">
@@ -111,6 +119,9 @@ export default function PersonBottomTab(props: any) {
             }
             mediaType="tv"
           />
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          <PersonImageTab images={images} />
         </TabPanel>
       </div>
     </div>

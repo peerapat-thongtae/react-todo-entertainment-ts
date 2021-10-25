@@ -118,9 +118,9 @@ const MovieDetail = (props: any) => {
                   </Link>
                 </p>
               </div>
-              {/* <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
+              <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
                 <p className="leading-relaxed ">{movie.overview}</p>
-              </div> */}
+              </div>
               <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
                 <span className="mr-4">
                   <b>Genre </b>
@@ -144,19 +144,20 @@ const MovieDetail = (props: any) => {
               </div>
               <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
                 <span className="mr-4">
-                  <b>Companies </b>
+                  <b>Keywords </b>
                 </span>
                 <span className="">
                   <div>
-                    {movie.production_companies &&
-                      movie.production_companies.map(
-                        (company: any, index: number) => {
+                    {movie.keywords &&
+                      movie.keywords.keywords &&
+                      movie.keywords.keywords.map(
+                        (keyword: any, index: number) => {
                           return (
                             <>
                               <Tag
                                 key={index}
-                                to={`/movie/discover?with_companies=${company.id}`}
-                                title={company.name}
+                                to={`/movie/discover?with_genres=${keyword.id}`}
+                                title={keyword.name}
                               />
                             </>
                           );

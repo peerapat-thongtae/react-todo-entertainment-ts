@@ -8,6 +8,7 @@ import CastTab from './CastTab';
 import CreatorTab from './CreatorTab';
 import MovieTab from './MovieTab';
 import VideoTab from './VideoTab';
+import CompanyTab from './CompanyTab';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -66,6 +67,10 @@ export default function NavTabs(props: any) {
   const [value, setValue] = React.useState(0);
   const casts = props.movie && props.movie.credits && props.movie.credits.cast;
   const crews = props.movie && props.movie.credits && props.movie.credits.crew;
+  const companies =
+    props.movie &&
+    props.movie.production_companies &&
+    props.movie.production_companies;
   const movies =
     props.movie && props.movie.similar && props.movie.similar.results;
 
@@ -85,7 +90,8 @@ export default function NavTabs(props: any) {
           <LinkTab label="Cast" {...a11yProps(0)} />
           <LinkTab label="Creator" {...a11yProps(1)} />
           <LinkTab label="Similar" {...a11yProps(2)} />
-          <LinkTab label="Videos" {...a11yProps(3)} />
+          <LinkTab label="Company" {...a11yProps(3)} />
+          <LinkTab label="Videos" {...a11yProps(4)} />
         </Tabs>
       </AppBar>
       <div className="">
@@ -99,6 +105,9 @@ export default function NavTabs(props: any) {
           <MovieTab movies={movies} mediaType={props.mediaType} />
         </TabPanel>
         <TabPanel value={value} index={3}>
+          <CompanyTab companies={companies} mediaType={props.mediaType} />
+        </TabPanel>
+        <TabPanel value={value} index={4}>
           <VideoTab />
         </TabPanel>
       </div>

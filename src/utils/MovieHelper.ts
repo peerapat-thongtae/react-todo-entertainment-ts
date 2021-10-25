@@ -9,7 +9,7 @@ const MovieHelper = {
     if (!path) {
       return '/poster/defaultoister,ong';
     }
-    return `https://www.themoviedb.org/t/p/original${path}`;
+    return `https://www.themoviedb.org/t/p/w92${path}`;
   },
   paramsToObject: (queryString: any) => {
     const params = new URLSearchParams(queryString);
