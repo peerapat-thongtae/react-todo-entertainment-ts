@@ -156,7 +156,7 @@ const MovieDetail = (props: any) => {
                             <>
                               <Tag
                                 key={index}
-                                to={`/movie/discover?with_genres=${keyword.id}`}
+                                to={`/keyword/${keyword.id}`}
                                 title={keyword.name}
                               />
                             </>

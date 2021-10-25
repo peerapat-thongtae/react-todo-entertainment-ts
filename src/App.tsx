@@ -26,6 +26,7 @@ import TodoTV from 'pages/TodoTV';
 import Person from 'pages/Person';
 import PersonDetail from 'pages/PersonDetail';
 import CastTab from 'components/CastTab';
+import MovieKeyword from 'pages/MovieKeyword';
 
 function App(props: any) {
   useEffect(() => {
@@ -56,6 +57,8 @@ function App(props: any) {
         <Route exact path="/test" component={CastTab} />
         <Route exact path="/person" component={Person} />
         <Route exact path="/person/:id" component={PersonDetail} />
+        <Route exact path="/person/:id" component={PersonDetail} />
+        <Route exact path="/keyword/:id" component={MovieKeyword} />
       </Switch>
     </>
   );

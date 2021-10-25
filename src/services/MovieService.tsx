@@ -59,6 +59,29 @@ const MovieService = {
       return err.response.data;
     }
   },
+  getKeywordDetail: async (keywordId: number) => {
+    try {
+      const res = await ApiMovieHelper({
+        method: 'GET',
+        url: `/3/keyword/${keywordId}`,
+      });
+      return res.data;
+    } catch (err) {
+      return err.response.data;
+    }
+  },
+  getByKeyword: async (keywordId: number, query: any) => {
+    try {
+      const res = await ApiMovieHelper({
+        method: 'GET',
+        url: `/3/keyword/${keywordId}/movies`,
+        params: query,
+      });
+      return res.data;
+    } catch (err) {
+      return err.response.data;
+    }
+  },
 };
 
 export default MovieService;
