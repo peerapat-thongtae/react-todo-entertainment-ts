@@ -9,6 +9,7 @@ import CreatorTab from './CreatorTab';
 import MovieTab from './MovieTab';
 import VideoTab from './VideoTab';
 import CompanyTab from './CompanyTab';
+import KeywordTab from './KeywordTab';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -92,6 +93,7 @@ export default function NavTabs(props: any) {
           <LinkTab label="Similar" {...a11yProps(2)} />
           <LinkTab label="Company" {...a11yProps(3)} />
           <LinkTab label="Videos" {...a11yProps(4)} />
+          <LinkTab label="Keywords" {...a11yProps(5)} />
         </Tabs>
       </AppBar>
       <div className="">
@@ -109,6 +111,9 @@ export default function NavTabs(props: any) {
         </TabPanel>
         <TabPanel value={value} index={4}>
           <VideoTab />
+        </TabPanel>
+        <TabPanel value={value} index={5}>
+          <KeywordTab movie={props.movie} />
         </TabPanel>
       </div>
     </div>

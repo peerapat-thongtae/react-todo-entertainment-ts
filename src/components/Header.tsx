@@ -40,7 +40,7 @@ const Header = (props: any) => {
                     </Link>
                   </li>
                   <li className="mt-3 md:ml-6 md:mt-0">
-                    <Link to="signin">
+                    <Link to="/signin">
                       <span className="text-gray-800 text-sm font-semibold border px-4 py-1 rounded-lg hover:text-purple-600 hover:border-purple-600">
                         Sign in
                       </span>

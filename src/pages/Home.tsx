@@ -13,6 +13,7 @@ const Home = (props: any) => {
   const [watchlistTV, setWatchlistTV] = useState([]);
   const [watchingTV, setWatchingTV] = useState([]);
   const [watchedTV, setWatchedTV] = useState([]);
+  const [waitingNextSeasonTV, setWaitingNextSeasonTV] = useState([]);
   useEffect(() => {
     props.setLoadingPage(true);
     Promise.all([
@@ -33,6 +34,10 @@ const Home = (props: any) => {
 
       TodoService.getTodoTVByStatus('watched').then((res) => {
         setWatchedTV(res.results);
+      }),
+
+      TodoService.getTodoTVByStatus('waiting_next_season').then((res) => {
+        setWaitingNextSeasonTV(res.results);
       }),
     ]).then(() => {
       props.setLoadingPage(false);
@@ -72,6 +77,13 @@ const Home = (props: any) => {
         title="My TV Watched"
         endpoint="/todo/tv/watched"
         movies={watchedTV}
+        mediaType="tv"
+      />
+
+      <MovieSlider
+        title="My TV Waiting next season"
+        endpoint="/todo/tv/waiting_next_season"
+        movies={waitingNextSeasonTV}
         mediaType="tv"
       />
     </Layout>

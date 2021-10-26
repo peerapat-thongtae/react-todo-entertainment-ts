@@ -9,17 +9,21 @@ const PersonList = (props: any) => {
   const { getPersons, title } = props;
   const [persons, setPersons]: any = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-
+  const query = {
+    page: 1,
+  };
   useEffect(() => {
     props.setLoadingPage(true);
-    const query = {
-      page: 1,
-    };
-    getPersons(query).then((res: any) => {
-      setPersons(res.results);
-      props.setLoadingPage(false);
-    });
-  }, [getPersons, props]);
+
+    getPersons(query)
+      .then((res: any) => {
+        setPersons(res.results);
+      })
+      .finally(() => {
+        props.setLoadingPage(false);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props]);
 
   const loadmorePerson = async () => {
     props.setLoadingPage(true);
@@ -52,7 +56,7 @@ const PersonList = (props: any) => {
         <button
           type="button"
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-          onClick={loadmorePerson}
+          onClick={() => loadmorePerson}
         >
           Load more...
         </button>
