@@ -5,3 +5,5 @@ export const GET_ERRORS = 'GET_ERRORS';
 export const LOADING_STATUS = 'LOADING_STATUS';
 export const OPEN_MODAL = 'OPEN_MODAL';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
+export const OPEN_MODAL_FILTER = 'OPEN_MODAL_FILTER';
+export const CLOSE_MODAL_FILTER = 'CLOSE_MODAL_FILTER';

@@ -75,6 +75,8 @@ export default function NavTabs(props: any) {
   const movies =
     props.movie && props.movie.similar && props.movie.similar.results;
 
+  const images = props.movie && props.movie.images && props.movie.images;
+
   const handleChange = (event: React.ChangeEvent<any>, newValue: number) => {
     setValue(newValue);
   };
@@ -92,7 +94,7 @@ export default function NavTabs(props: any) {
           <LinkTab label="Creator" {...a11yProps(1)} />
           <LinkTab label="Similar" {...a11yProps(2)} />
           <LinkTab label="Company" {...a11yProps(3)} />
-          <LinkTab label="Videos" {...a11yProps(4)} />
+          <LinkTab label="Images" {...a11yProps(4)} />
           <LinkTab label="Keywords" {...a11yProps(5)} />
         </Tabs>
       </AppBar>
@@ -110,7 +112,7 @@ export default function NavTabs(props: any) {
           <CompanyTab companies={companies} mediaType={props.mediaType} />
         </TabPanel>
         <TabPanel value={value} index={4}>
-          <VideoTab />
+          {/* <MoviePosterTab images={images} /> */}
         </TabPanel>
         <TabPanel value={value} index={5}>
           <KeywordTab movie={props.movie} />

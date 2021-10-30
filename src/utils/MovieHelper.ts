@@ -9,7 +9,7 @@ const MovieHelper = {
     if (!path) {
       return '/poster/defaultoister,ong';
     }
-    return `https://www.themoviedb.org/t/p/w92${path}`;
+    return `https://www.themoviedb.org/t/p/original${path}`;
   },
   paramsToObject: (queryString: any) => {
     const params = new URLSearchParams(queryString);
@@ -24,6 +24,16 @@ const MovieHelper = {
 
   objectToQueryString: (obj: any) => {
     return new URLSearchParams(obj).toString();
+  },
+
+  youtubePath: (key: string) => {
+    const youtubeData = {
+      thumbnail: `https://img.youtube.com/vi/${key}/mqdefault.jpg`,
+      src: `https://www.youtube.com/embed/${key}?rel=0&showinfo=0&autoplay=1`,
+      url: `https://youtube.com/watch?v=${key}`,
+    };
+
+    return youtubeData;
   },
 };
 

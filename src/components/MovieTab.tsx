@@ -1,6 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import MovieHelper from 'utils/MovieHelper';
 import MovieCard from './MovieCard';
 
 const MovieTab = (props: any) => {
