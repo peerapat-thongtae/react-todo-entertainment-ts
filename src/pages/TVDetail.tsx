@@ -60,42 +60,9 @@ const TVDetail = (props: any) => {
                   </span>
                 </span>
                 <span className="flex ml-3 pl-3 py-2 border-l-2 border-gray-200">
-                  <a className="text-gray-500">
-                    <svg
-                      fill="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="w-5 h-5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
-                    </svg>
-                  </a>
-                  <a className="ml-2 text-gray-500">
-                    <svg
-                      fill="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="w-5 h-5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
-                    </svg>
-                  </a>
-                  <a className="ml-2 text-gray-500">
-                    <svg
-                      fill="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="w-5 h-5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
-                    </svg>
-                  </a>
+                  <span className="text-gray-600 font-bold">
+                    {movie.status}
+                  </span>
                 </span>
               </div>
               <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
@@ -108,15 +75,38 @@ const TVDetail = (props: any) => {
                   </Link>
                 </p>
               </div>
+              <div className=" mb-4 pb-5 border-b-2 border-gray-200 mb-5">
+                <div className="leading-relaxed ">
+                  <b>Number of seasons : </b>
+                  <Link to={`/person/${created_by && created_by.id}}`}>
+                    <span className="hover:text-orange-500">
+                      {movie.number_of_seasons}
+                    </span>
+                  </Link>
+                </div>
+                <div className="leading-relaxed ">
+                  <b>Next episode air : </b>
+                  <Link to={`/person/${created_by && created_by.id}}`}>
+                    <span className="hover:text-orange-500">
+                      {movie.next_episode_to_air
+                        ? `Season 
+                        ${movie.next_episode_to_air.season_number} | EP.
+                        ${movie.next_episode_to_air.episode_number} |
+                        ${dayjs(movie.next_episode_to_air.air_date).format(
+                          'DD MMM YYYY'
+                        )}`
+                        : '-'}
+                    </span>
+                  </Link>
+                </div>
+              </div>
               <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
                 <p className="leading-relaxed ">{movie.overview}</p>
               </div>
-              <div className="flex justify-center mb-4 pb-5 border-b-2 border-gray-200 mb-5 w-full">
-                <p className="leading-relaxed w-full">
-                  <DropdownTodo media={movie} mediaType="tv" />
-                </p>
-              </div>
               <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
+                <span className="mr-4">
+                  <b>Genre </b>
+                </span>
                 <span className="">
                   <div>
                     {movie.genres &&
@@ -136,6 +126,9 @@ const TVDetail = (props: any) => {
               </div>
               <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
                 <span className="">
+                  <b>Watch Providers (TH) : </b>
+                </span>
+                <span className="ml-2">
                   <div>
                     {watchProviders ? (
                       watchProviders.map((flatrate: any, index: number) => {
@@ -143,15 +136,20 @@ const TVDetail = (props: any) => {
                           <WatchProviderTag
                             key={index}
                             imagePath={MovieHelper.logoPath(flatrate.logo_path)}
-                            to={`/movie/discover?with_ott_providers=${flatrate.provider_id}&ott_region=TH`}
+                            to={`/tv/discover?with_ott_providers=${flatrate.provider_id}&ott_region=TH`}
                           />
                         );
                       })
                     ) : (
-                      <div>No Streaming In TH</div>
+                      <div> No Streaming In TH</div>
                     )}
                   </div>
                 </span>
+              </div>
+              <div className="flex justify-center mb-4 pb-5 border-b-2 border-gray-200 mb-5 w-full">
+                <p className="leading-relaxed w-full">
+                  <DropdownTodo media={movie} mediaType="tv" />
+                </p>
               </div>
             </div>
           </div>

@@ -142,30 +142,6 @@ const MovieDetail = (props: any) => {
                   </div>
                 </span>
               </div>
-              {/* <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
-                <span className="mr-4">
-                  <b>Keywords </b>
-                </span>
-                <span className="">
-                  <div>
-                    {movie.keywords &&
-                      movie.keywords.keywords &&
-                      movie.keywords.keywords.map(
-                        (keyword: any, index: number) => {
-                          return (
-                            <>
-                              <Tag
-                                key={index}
-                                to={`/keyword/${keyword.id}`}
-                                title={keyword.name}
-                              />
-                            </>
-                          );
-                        }
-                      )}
-                  </div>
-                </span>
-              </div> */}
               <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
                 <span className="">
                   <b>Watch Providers (TH) : </b>
