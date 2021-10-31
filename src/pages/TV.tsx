@@ -8,14 +8,23 @@ import { setLoadingPage } from '../store/actions/loader';
 const TV = (props: any) => {
   const [tvPopulars, setTVPopulars] = useState([]);
   const [tvTopRated, setTVTopRated] = useState([]);
+  const [tvOnAir, setTVOnAir] = useState([]);
   useEffect(() => {
     props.setLoadingPage(true);
-    TVService.getTVByType('popular').then((res) => {
-      setTVPopulars(res.results);
-    });
 
-    TVService.getTVByType('top_rated').then((res) => {
-      setTVTopRated(res.results);
+    Promise.all([
+      TVService.getTVByType('popular').then((res) => {
+        setTVPopulars(res.results);
+      }),
+
+      TVService.getTVByType('top_rated').then((res) => {
+        setTVTopRated(res.results);
+      }),
+
+      TVService.getTVByType('on_the_air').then((res) => {
+        setTVOnAir(res.results);
+      }),
+    ]).finally(() => {
       props.setLoadingPage(false);
     });
   }, [props]);
@@ -29,8 +38,14 @@ const TV = (props: any) => {
       />
       <MovieSlider
         title="Top Rated"
-        type="/tv/top_rated"
+        endpoint="/tv/top_rated"
         movies={tvTopRated}
+        mediaType="tv"
+      />
+      <MovieSlider
+        title="On Air"
+        endpoint="/tv/on_the_air"
+        movies={tvOnAir}
         mediaType="tv"
       />
     </Layout>

@@ -27,6 +27,7 @@ import Person from 'pages/Person';
 import PersonDetail from 'pages/PersonDetail';
 import CastTab from 'components/CastTab';
 import MovieKeyword from 'pages/MovieKeyword';
+import TVOnAir from 'pages/TVOnAir';
 
 function App(props: any) {
   useEffect(() => {
@@ -49,6 +50,7 @@ function App(props: any) {
         <Route exact path="/movie/top_rated" component={MovieTopRated} />
         <Route exact path="/tv/popular" component={TVPopular} />
         <Route exact path="/tv/top_rated" component={TVTopRated} />
+        <Route exact path="/tv/on_the_air" component={TVOnAir} />
         <Route exact path="/movie/discover" component={MovieDiscover} />
         <Route exact path="/movie/:id" component={MovieDetail} />
         <Route exact path="/tv/:id" component={TVDetail} />
