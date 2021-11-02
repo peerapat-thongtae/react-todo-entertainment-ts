@@ -11,10 +11,7 @@ const MovieCard = (props: any) => {
   return (
     <div className="justify-center items-center">
       <div className="container mx-auto max-w-xs rounded-lg overflow-hidden shadow-lg my-2 bg-white ">
-        <div
-          className="relative mb-6 card-img"
-          style={{ backgroundColor: 'black' }}
-        >
+        <div className="relative mb-6 card-img">
           <Link to={`/${mediaType}/${movie.id}`}>
             <img
               className="w-full h-full"

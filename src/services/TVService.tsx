@@ -48,6 +48,18 @@ const TVService = {
       return err.response.data;
     }
   },
+  discoverTV: async (query: any) => {
+    try {
+      const res = await ApiMovieHelper({
+        method: 'GET',
+        url: `/3/discover/tv`,
+        params: query,
+      });
+      return res.data;
+    } catch (err) {
+      return err.response.data;
+    }
+  },
 };
 
 export default TVService;

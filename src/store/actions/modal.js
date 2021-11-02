@@ -15,6 +15,7 @@ export const setCloseModal = () => (dispatch) => {
 };
 
 export const setOpenModalFilter = (payload = {}) => (dispatch) => {
+  console.log(payload);
   dispatch(openModalFilter(payload));
 };
 

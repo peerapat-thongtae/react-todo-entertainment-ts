@@ -7,7 +7,7 @@ import { setOpenModalFilter } from 'store/actions/modal';
 const ButtonFilter = (props: any) => {
   const filterShow = props.filterShow || false;
   const handleSearch = () => {
-    props.setOpenModalFilter({});
+    props.setOpenModalFilter({ mediaType: props.mediaType });
   };
   return (
     filterShow && (

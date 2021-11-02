@@ -5,19 +5,30 @@ import MovieService from 'services/MovieService';
 import MovieHelper from 'utils/MovieHelper';
 import { setCloseModalFilter } from 'store/actions/modal';
 import { connect } from 'react-redux';
+import TVService from 'services/TVService';
 
 const FilterModal = (props: any) => {
   const { title, modal } = props;
   const search = MovieHelper.paramsToObject(props.location.search);
   const [genres, setGenres] = useState([]);
   const [queryFilter, setQueryFilter] = useState(search);
-  useEffect(() => {
-    Promise.all([
+  const { mediaType } = modal;
+
+  const getGenres = (type: string) => {
+    if (type === 'movie') {
       MovieService.getGenres().then((res) => {
         setGenres(res.genres);
-      }),
-    ]);
-  }, []);
+      });
+    }
+    if (type === 'tv') {
+      TVService.getGenres().then((res) => {
+        setGenres(res.genres);
+      });
+    }
+  };
+  useEffect(() => {
+    Promise.all([getGenres(mediaType)]);
+  }, [mediaType]);
 
   const splitToGenresArray = () => {
     const arr = queryFilter.with_genres
@@ -46,7 +57,9 @@ const FilterModal = (props: any) => {
 
   const handleSubmitFilter = () => {
     props.history.push(
-      `/movie/discover?${MovieHelper.objectToQueryString(queryFilter)}`
+      `${props.location.pathname}?${MovieHelper.objectToQueryString(
+        queryFilter
+      )}`
     );
     return '';
   };

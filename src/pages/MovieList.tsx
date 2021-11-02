@@ -41,7 +41,7 @@ const MovieList = (props: any) => {
               <DropdownSort sortShow={sortShow} />
             </div>
             <div className="inline-block">
-              <ButtonFilter filterShow={filterShow} />
+              <ButtonFilter filterShow={filterShow} mediaType={mediaType} />
             </div>
           </div>
         </div>
