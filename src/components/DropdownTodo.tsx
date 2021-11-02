@@ -51,16 +51,16 @@ const DropdownTodo = (props: any) => {
         {mediaType === 'movie' ? (
           <>
             <option value="">Choose watch type</option>
-            <option value="WATCHLIST">Watchlist</option>
-            <option value="WATCHED">Watched</option>
+            <option value="watchlist">Watchlist</option>
+            <option value="watched">Watched</option>
           </>
         ) : (
           <>
             <option value="">Choose watch type</option>
-            <option value="WATCHLIST">Watchlist</option>
-            <option value="WATCHED">Watched</option>
-            <option value="WATCHING">Watching</option>
-            <option value="WAITING_NEXT_SEASON">Waiting Next Season</option>
+            <option value="watchlist">Watchlist</option>
+            <option value="watched">Watched</option>
+            <option value="watching">Watching</option>
+            <option value="waiting_next_season">Waiting Next Season</option>
           </>
         )}
       </select>

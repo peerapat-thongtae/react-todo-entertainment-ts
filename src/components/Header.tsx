@@ -1,3 +1,5 @@
+import { faFilm } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
@@ -12,9 +14,7 @@ const Header = (props: any) => {
         <div className="container flex flex-col items-center justify-between px-4 py-6 mx-auto md:flex-row">
           <Link to="/">
             <span className="flex items-center space-x-2">
-              <svg className="w-8" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M2 6a2 2 0 012-2h12a2 2 0 012 2v2a2 2 0 100 4v2a2 2 0 01-2 2H4a2 2 0 01-2-2v-2a2 2 0 100-4V6z" />
-              </svg>
+              <FontAwesomeIcon icon={faFilm} size="lg" />
               <span className="text-2xl font-bold tracking-wide uppercase">
                 Todozius
               </span>

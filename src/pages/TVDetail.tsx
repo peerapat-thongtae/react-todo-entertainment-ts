@@ -45,9 +45,6 @@ const TVDetail = (props: any) => {
               <h1 className="text-gray-900 text-2xl font-bold title-font font-medium mb-1">
                 {movie.name}
               </h1>
-              {/* <h2 className="text-sm ml-4 title-font text-gray-500 tracking-widest">
-                BRAND NAME
-              </h2> */}
               <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
                 <span className="flex items-center">
                   <span className="text-gray-600 ml-3">
