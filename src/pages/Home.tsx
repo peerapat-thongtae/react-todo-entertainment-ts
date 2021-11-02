@@ -5,8 +5,16 @@ import { connect } from 'react-redux';
 import { setLoadingPage } from 'store/actions/loader';
 
 import TodoService from 'services/TodoService';
+import { Redirect } from 'react-router-dom';
 
 const Home = (props: any) => {
+  if (props.user.isAuthenticated) {
+    return <UserHome />;
+  }
+  return <Redirect to="/movie" />;
+};
+
+const UserHome = (props: any) => {
   const [watchlistMovies, setWatchlistMovies] = useState([]);
   const [watchedMovies, setWatchedMovies] = useState([]);
 
@@ -90,4 +98,8 @@ const Home = (props: any) => {
   );
 };
 
-export default connect(null, { setLoadingPage })(Home);
+const mapStateToProps = (state: any) => ({
+  user: state.user,
+});
+
+export default connect(mapStateToProps, { setLoadingPage })(Home);

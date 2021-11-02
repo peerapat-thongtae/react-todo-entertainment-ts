@@ -164,11 +164,13 @@ const MovieDetail = (props: any) => {
                   </div>
                 </span>
               </div>
-              <div className="flex justify-center mb-4 pb-5 border-b-2 border-gray-200 mb-5 w-full">
-                <p className="leading-relaxed w-full">
-                  <DropdownTodo media={movie} mediaType="movie" />
-                </p>
-              </div>
+              {props.user.isAuthenticated && (
+                <div className="flex justify-center mb-4 pb-5 border-b-2 border-gray-200 mb-5 w-full">
+                  <p className="leading-relaxed w-full">
+                    <DropdownTodo media={movie} mediaType="movie" />
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -178,4 +180,8 @@ const MovieDetail = (props: any) => {
   );
 };
 
-export default connect(null, { setLoadingPage })(MovieDetail);
+const mapStateToProps = (state: any) => ({
+  user: state.user,
+});
+
+export default connect(mapStateToProps, { setLoadingPage })(MovieDetail);
