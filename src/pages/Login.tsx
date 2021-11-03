@@ -1,8 +1,9 @@
 import InputCustom from 'components/Form/InputCustom';
 import Layout from 'components/Layout';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
 import { loginUser } from 'store/actions/auth';
 
 const Login = (props: any) => {
@@ -16,18 +17,7 @@ const Login = (props: any) => {
     props.loginUser({ email, password }, props.history);
   };
 
-  useEffect(() => {
-    if (props.user.isAuthenticated) {
-      props.history.push('/');
-    }
-
-    // if (props.errors) {
-    //   setErrors(props.errors);
-    //   setLoading(false);
-    // }
-  }, [props]);
-
-  return (
+  return props.user.isAuthenticated ? (
     <Layout>
       <div className="flex flex-col my-20">
         <div className="grid place-items-center mx-2 my-20 sm:my-auto">
@@ -115,6 +105,8 @@ const Login = (props: any) => {
         </div>
       </div>
     </Layout>
+  ) : (
+    <Redirect to="/movie" />
   );
 };
 

@@ -38,7 +38,7 @@ const UserHome = (props: any) => {
       TodoService.getTodoTVByStatus('waiting_next_season').then((res) => {
         setWaitingNextSeasonTV(res.results);
       }),
-    ]).finally(() => {
+    ]).then(() => {
       props.setLoadingPage(false);
     });
   }, [props]);
