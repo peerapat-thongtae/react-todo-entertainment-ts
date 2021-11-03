@@ -6,9 +6,11 @@ import '@brainhubeu/react-carousel/lib/style.css';
 
 const MovieSlider = (props: any) => {
   const { title, movies, endpoint, mediaType } = props;
-  const listMovies = movies.map((movie: any, index: number) => (
-    <MovieCard key={index} movie={movie} mediaType={mediaType} />
-  ));
+  const listMovies =
+    movies &&
+    movies.map((movie: any, index: number) => (
+      <MovieCard key={index} movie={movie} mediaType={mediaType} />
+    ));
   return (
     <>
       <div className="mb-12">

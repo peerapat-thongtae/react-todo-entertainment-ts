@@ -16,7 +16,7 @@ export const loginUser = (state, history) => (dispatch) => {
       if (resp.data.success) {
         dispatch(setCurrentUser(resp.data.user));
         AuthService.saveToken(resp.data.user.token);
-        history.push('/');
+        history.push('/movie');
       }
     })
     .catch((error) => {
