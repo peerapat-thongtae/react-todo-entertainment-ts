@@ -10,6 +10,7 @@ import { setLoadingPage } from 'store/actions/loader';
 import { Link } from 'react-router-dom';
 import WatchProviderTag from 'components/WatchProviderTag';
 import TabPanel from 'components/TabPanel';
+import TabBottomTV from 'components/TabBottomTV';
 
 const TVDetail = (props: any) => {
   const movieId = props.match.params.id;
@@ -152,7 +153,7 @@ const TVDetail = (props: any) => {
           </div>
         </div>
       </section>
-      <TabPanel movie={movie} mediaType="tv" />
+      <TabBottomTV movie={movie} mediaType="tv" />
     </Layout>
   );
 };
