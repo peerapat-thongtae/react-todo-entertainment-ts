@@ -87,6 +87,37 @@ export default function PersonBottomTab(props: any) {
     setValue(newValue);
   };
 
+  const tabArr = [
+    {
+      label: 'Movies',
+      panel: (
+        <MovieTab
+          movies={
+            props.person.known_for_department === 'Acting'
+              ? cast_movies
+              : crew_movies
+          }
+          mediaType="movie"
+        />
+      ),
+    },
+    {
+      label: 'TV',
+      panel: (
+        <MovieTab
+          movies={
+            props.person.known_for_department === 'Acting' ? cast_tv : crew_tv
+          }
+          mediaType="tv"
+        />
+      ),
+    },
+    {
+      label: 'Images',
+      panel: <PersonImageTab images={images} />,
+    },
+  ];
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -96,33 +127,23 @@ export default function PersonBottomTab(props: any) {
           onChange={handleChange}
           aria-label="nav tabs example"
         >
-          <LinkTab label="Movies" {...a11yProps(0)} />
-          <LinkTab label="TV" {...a11yProps(1)} />
-          <LinkTab label="Images" {...a11yProps(2)} />
+          {tabArr &&
+            tabArr.map((tab, index) => {
+              return (
+                <LinkTab label={tab.label} {...a11yProps(index)} key={index} />
+              );
+            })}
         </Tabs>
       </AppBar>
       <div className="">
-        <TabPanel value={value} index={0}>
-          <MovieTab
-            movies={
-              props.person.known_for_department === 'Acting'
-                ? cast_movies
-                : crew_movies
-            }
-            mediaType="movie"
-          />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <MovieTab
-            movies={
-              props.person.known_for_department === 'Acting' ? cast_tv : crew_tv
-            }
-            mediaType="tv"
-          />
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          <PersonImageTab images={images} />
-        </TabPanel>
+        {tabArr &&
+          tabArr.map((tab, index) => {
+            return (
+              <TabPanel value={value} index={index} key={index}>
+                {tab.panel}
+              </TabPanel>
+            );
+          })}
       </div>
     </div>
   );

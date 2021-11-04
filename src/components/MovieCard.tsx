@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import MovieHelper from 'utils/MovieHelper';
-import dayjs from 'dayjs';
 import { connect } from 'react-redux';
 import DropdownTodo from './DropdownTodo';
 
@@ -39,8 +38,8 @@ const MovieCard = (props: any) => {
           </Link>
 
           <p className="tracking-wide text-sm mb-2">
-            {dayjs(movie.release_date || movie.first_air_date).format(
-              'DD MMM YYYY'
+            {MovieHelper.releaseDate(
+              movie.release_date || movie.first_air_date
             )}
           </p>
           <p className="tracking-wide text-sm mb-2">{movie.vote_average}/10</p>

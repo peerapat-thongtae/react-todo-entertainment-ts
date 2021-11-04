@@ -75,9 +75,6 @@ export default function TabBottomTV(props: any) {
   const movies =
     props.movie && props.movie.similar && props.movie.similar.results;
 
-  const posters =
-    props.movie && props.movie.images && props.movie.images.posters;
-
   const backdrops =
     props.movie && props.movie.images && props.movie.images.backdrops;
   const seasons = props.movie && props.movie.seasons;
@@ -107,10 +104,7 @@ export default function TabBottomTV(props: any) {
       label: 'Company',
       panel: <CompanyTab companies={companies} mediaType={props.mediaType} />,
     },
-    {
-      label: 'Posters',
-      panel: <PosterTab images={posters} />,
-    },
+
     {
       label: 'Backdrops',
       panel: <PosterTab images={backdrops} />,

@@ -7,8 +7,8 @@ import Box from '@material-ui/core/Box';
 import CastTab from './CastTab';
 import CreatorTab from './CreatorTab';
 import MovieTab from './MovieTab';
-import VideoTab from './VideoTab';
 import CompanyTab from './CompanyTab';
+import PosterTab from './PosterTab';
 import KeywordTab from './KeywordTab';
 
 interface TabPanelProps {
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function NavTabs(props: any) {
+export default function TabBottomMovie(props: any) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const casts = props.movie && props.movie.credits && props.movie.credits.cast;
@@ -75,11 +75,39 @@ export default function NavTabs(props: any) {
   const movies =
     props.movie && props.movie.similar && props.movie.similar.results;
 
-  const images = props.movie && props.movie.images && props.movie.images;
+  const backdrops =
+    props.movie && props.movie.images && props.movie.images.backdrops;
 
   const handleChange = (event: React.ChangeEvent<any>, newValue: number) => {
     setValue(newValue);
   };
+
+  const tabArr = [
+    {
+      label: 'Cast',
+      panel: <CastTab casts={casts} />,
+    },
+    {
+      label: 'Creator',
+      panel: <CreatorTab crews={crews} />,
+    },
+    {
+      label: 'Similar',
+      panel: <MovieTab movies={movies} mediaType={props.mediaType} />,
+    },
+    {
+      label: 'Company',
+      panel: <CompanyTab companies={companies} mediaType={props.mediaType} />,
+    },
+    {
+      label: 'Keywords',
+      panel: <KeywordTab movie={props.movie} />,
+    },
+    {
+      label: 'Backdrops',
+      panel: <PosterTab images={backdrops} />,
+    },
+  ];
 
   return (
     <div className={classes.root}>
@@ -90,33 +118,23 @@ export default function NavTabs(props: any) {
           onChange={handleChange}
           aria-label="nav tabs example"
         >
-          <LinkTab label="Cast" {...a11yProps(0)} />
-          <LinkTab label="Creator" {...a11yProps(1)} />
-          <LinkTab label="Similar" {...a11yProps(2)} />
-          <LinkTab label="Company" {...a11yProps(3)} />
-          <LinkTab label="Images" {...a11yProps(4)} />
-          <LinkTab label="Keywords" {...a11yProps(5)} />
+          {tabArr &&
+            tabArr.map((tab, index) => {
+              return (
+                <LinkTab label={tab.label} {...a11yProps(index)} key={index} />
+              );
+            })}
         </Tabs>
       </AppBar>
       <div className="">
-        <TabPanel value={value} index={0}>
-          <CastTab casts={casts} />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <CreatorTab crews={crews} />
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          <MovieTab movies={movies} mediaType={props.mediaType} />
-        </TabPanel>
-        <TabPanel value={value} index={3}>
-          <CompanyTab companies={companies} mediaType={props.mediaType} />
-        </TabPanel>
-        <TabPanel value={value} index={4}>
-          {/* <MoviePosterTab images={images} /> */}
-        </TabPanel>
-        <TabPanel value={value} index={5}>
-          <KeywordTab movie={props.movie} />
-        </TabPanel>
+        {tabArr &&
+          tabArr.map((tab, index) => {
+            return (
+              <TabPanel value={value} index={index} key={index}>
+                {tab.panel}
+              </TabPanel>
+            );
+          })}
       </div>
     </div>
   );

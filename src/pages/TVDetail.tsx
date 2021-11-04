@@ -9,7 +9,6 @@ import MovieHelper from 'utils/MovieHelper';
 import { setLoadingPage } from 'store/actions/loader';
 import { Link } from 'react-router-dom';
 import WatchProviderTag from 'components/WatchProviderTag';
-import TabPanel from 'components/TabPanel';
 import TabBottomTV from 'components/TabBottomTV';
 
 const TVDetail = (props: any) => {
@@ -49,7 +48,7 @@ const TVDetail = (props: any) => {
               <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
                 <span className="flex items-center">
                   <span className="text-gray-600 ml-3">
-                    {dayjs(movie.first_air_date).format('DD MMM YYYY')}
+                    {MovieHelper.releaseDate(movie.first_air_date)}
                   </span>
                 </span>
                 <span className="flex items-center ml-3 border-l-2 border-gray-200">

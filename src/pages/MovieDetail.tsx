@@ -1,6 +1,5 @@
 import DropdownTodo from 'components/DropdownTodo';
 import Layout from 'components/Layout';
-import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import MovieService from 'services/MovieService';
@@ -61,7 +60,7 @@ const MovieDetail = (props: any) => {
               <div className="flex mb-4 pb-5 border-b-2 border-gray-200 mb-5">
                 <span className="flex items-center">
                   <span className="text-gray-600 ml-3">
-                    {dayjs(movie.release_date).format('DD MMM YYYY')}
+                    {MovieHelper.releaseDate(movie.release_date)}
                   </span>
                 </span>
                 <span className="flex items-center ml-3 border-l-2 border-gray-200">

@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 const MovieHelper = {
   posterPath: (path: string) => {
     if (!path) {
@@ -6,6 +8,12 @@ const MovieHelper = {
     return `https://www.themoviedb.org/t/p/w600_and_h900_bestv2${path}`;
   },
   logoPath: (path: string) => {
+    if (!path) {
+      return '/poster/defaultoister,ong';
+    }
+    return `https://www.themoviedb.org/t/p/original${path}`;
+  },
+  originalImagePath: (path: string) => {
     if (!path) {
       return '/poster/defaultoister,ong';
     }
@@ -24,6 +32,13 @@ const MovieHelper = {
 
   objectToQueryString: (obj: any) => {
     return new URLSearchParams(obj).toString();
+  },
+
+  releaseDate: (date: Date) => {
+    if (date) {
+      return dayjs(date).format('DD MMM YYYY');
+    }
+    return '-';
   },
 
   youtubePath: (key: string) => {
