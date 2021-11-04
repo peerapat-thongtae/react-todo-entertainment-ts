@@ -38,7 +38,7 @@ const TVDetail = (props: any) => {
             <img
               alt={movie.name}
               className="lg:w-1/2 w1/2 object-cover object-center rounded border border-gray-200 featured_image"
-              src={`${MovieHelper.posterPath(movie.poster_path)}`}
+              src={`${MovieHelper.originalImagePath(movie.poster_path)}`}
             />
 
             <div className="lg:w-1/2 w-full lg:pl-16 lg:py-6 mt-6 lg:mt-0">
