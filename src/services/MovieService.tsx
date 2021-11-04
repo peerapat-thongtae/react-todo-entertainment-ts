@@ -84,6 +84,17 @@ const MovieService = {
       return err.response.data;
     }
   },
+  getCollectionDetail: async (collectionId: number) => {
+    try {
+      const res = await ApiMovieHelper({
+        method: 'GET',
+        url: `/3/collection/${collectionId}`,
+      });
+      return res.data;
+    } catch (err) {
+      return err.response.data;
+    }
+  },
 };
 
 export default MovieService;

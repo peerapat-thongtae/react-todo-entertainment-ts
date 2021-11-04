@@ -29,6 +29,7 @@ import CastTab from 'components/CastTab';
 import MovieKeyword from 'pages/MovieKeyword';
 import TVOnAir from 'pages/TVOnAir';
 import TVDiscover from 'pages/TVDiscover';
+import CollectionDetail from 'pages/CollectionDetail';
 
 function App(props: any) {
   useEffect(() => {
@@ -63,6 +64,7 @@ function App(props: any) {
         <Route exact path="/person/:id" component={PersonDetail} />
         <Route exact path="/person/:id" component={PersonDetail} />
         <Route exact path="/keyword/:id" component={MovieKeyword} />
+        <Route exact path="/collection/:id" component={CollectionDetail} />
       </Switch>
     </>
   );
