@@ -60,6 +60,18 @@ const TVService = {
       return err.response.data;
     }
   },
+  getSeasonDetail: async (tvId: number, seasonNumber: number) => {
+    try {
+      const res = await ApiMovieHelper({
+        method: 'GET',
+        url: `/3/tv/${tvId}/season/${seasonNumber}`,
+        params: { append_to_response: 'credits' },
+      });
+      return res.data;
+    } catch (err) {
+      return err.response.data;
+    }
+  },
 };
 
 export default TVService;

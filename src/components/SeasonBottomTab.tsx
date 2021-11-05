@@ -6,10 +6,7 @@ import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import CastTab from './CastTab';
 import CreatorTab from './CreatorTab';
-import MovieTab from './MovieTab';
-import CompanyTab from './CompanyTab';
-import SeasonTab from './SeasonTab';
-import PosterTab from './PosterTab';
+import EpisodeTab from './EpisodeTab';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -63,21 +60,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function TabBottomTV(props: any) {
+export default function SeasonBottomTab(props: any) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const casts = props.movie && props.movie.credits && props.movie.credits.cast;
   const crews = props.movie && props.movie.credits && props.movie.credits.crew;
-  const companies =
-    props.movie &&
-    props.movie.production_companies &&
-    props.movie.production_companies;
-  const movies =
-    props.movie && props.movie.similar && props.movie.similar.results;
 
-  const backdrops =
-    props.movie && props.movie.images && props.movie.images.backdrops;
-  const seasons = props.movie && props.movie.seasons;
+  const episodes = props.movie && props.movie.episodes;
 
   const handleChange = (event: React.ChangeEvent<any>, newValue: number) => {
     setValue(newValue);
@@ -93,21 +82,8 @@ export default function TabBottomTV(props: any) {
       panel: <CreatorTab crews={crews} />,
     },
     {
-      label: 'Seasons',
-      panel: <SeasonTab seasons={seasons} movieId={props.movie.id} />,
-    },
-    {
-      label: 'Similar',
-      panel: <MovieTab movies={movies} mediaType={props.mediaType} />,
-    },
-    {
-      label: 'Company',
-      panel: <CompanyTab companies={companies} mediaType={props.mediaType} />,
-    },
-
-    {
-      label: 'Backdrops',
-      panel: <PosterTab images={backdrops} />,
+      label: 'Episodes',
+      panel: <EpisodeTab episodes={episodes} />,
     },
   ];
 

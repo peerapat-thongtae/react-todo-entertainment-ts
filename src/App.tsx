@@ -30,6 +30,7 @@ import MovieKeyword from 'pages/MovieKeyword';
 import TVOnAir from 'pages/TVOnAir';
 import TVDiscover from 'pages/TVDiscover';
 import CollectionDetail from 'pages/CollectionDetail';
+import SeasonTVDetail from 'pages/SeasonTVDetail';
 
 function App(props: any) {
   useEffect(() => {
@@ -65,6 +66,11 @@ function App(props: any) {
         <Route exact path="/person/:id" component={PersonDetail} />
         <Route exact path="/keyword/:id" component={MovieKeyword} />
         <Route exact path="/collection/:id" component={CollectionDetail} />
+        <Route
+          exact
+          path="/tv/:tvId/season/:seasonNumber"
+          component={SeasonTVDetail}
+        />
       </Switch>
     </>
   );
