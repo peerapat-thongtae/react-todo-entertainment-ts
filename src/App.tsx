@@ -31,13 +31,11 @@ import TVOnAir from 'pages/TVOnAir';
 import TVDiscover from 'pages/TVDiscover';
 import CollectionDetail from 'pages/CollectionDetail';
 import SeasonTVDetail from 'pages/SeasonTVDetail';
+import NotFound from 'pages/NotFound';
 
 function App(props: any) {
   useEffect(() => {
-    props.getProfile().finally(() => {
-      // setLoading(false);
-    });
-    props.checkExpiredToken(props.history);
+    Promise.all([props.getProfile(), props.checkExpiredToken(props.history)]);
   }, [props]);
   return (
     <>
@@ -71,6 +69,7 @@ function App(props: any) {
           path="/tv/:tvId/season/:seasonNumber"
           component={SeasonTVDetail}
         />
+        <Route component={NotFound} />
       </Switch>
     </>
   );

@@ -15,6 +15,7 @@ const UserHome = (props: any) => {
   const [waitingNextSeasonTV, setWaitingNextSeasonTV] = useState([]);
   useEffect(() => {
     props.setLoadingPage(true);
+
     Promise.all([
       TodoService.getTodoMovieByStatus('watchlist').then((res) => {
         setWatchlistMovies(res.results);
@@ -38,53 +39,64 @@ const UserHome = (props: any) => {
       TodoService.getTodoTVByStatus('waiting_next_season').then((res) => {
         setWaitingNextSeasonTV(res.results);
       }),
-    ]).then(() => {
+    ]).finally(() => {
       props.setLoadingPage(false);
     });
   }, [props]);
   return (
     <Layout>
-      <MovieSlider
-        title="My Movie Watchlist"
-        endpoint="/todo/movie/watchlist"
-        movies={watchlistMovies}
-        mediaType="movie"
-      />
+      {watchlistMovies && (
+        <MovieSlider
+          title="My Movie Watchlist"
+          endpoint="/todo/movie/watchlist"
+          movies={watchlistMovies}
+          mediaType="movie"
+        />
+      )}
+      {watchedMovies && (
+        <MovieSlider
+          title="My Movie Watched"
+          endpoint="/todo/movie/watched"
+          movies={watchedMovies}
+          mediaType="movie"
+        />
+      )}
 
-      <MovieSlider
-        title="My Movie Watched"
-        endpoint="/todo/movie/watched"
-        movies={watchedMovies}
-        mediaType="movie"
-      />
+      {watchlistTV && (
+        <MovieSlider
+          title="My TV Watchlist"
+          endpoint="/todo/tv/watchlist"
+          movies={watchlistTV}
+          mediaType="tv"
+        />
+      )}
 
-      <MovieSlider
-        title="My TV Watchlist"
-        endpoint="/todo/tv/watchlist"
-        movies={watchlistTV}
-        mediaType="tv"
-      />
+      {watchingTV && (
+        <MovieSlider
+          title="My TV Watching"
+          endpoint="/todo/tv/watching"
+          movies={watchingTV}
+          mediaType="tv"
+        />
+      )}
 
-      <MovieSlider
-        title="My TV Watching"
-        endpoint="/todo/tv/watching"
-        movies={watchingTV}
-        mediaType="tv"
-      />
+      {watchedTV && (
+        <MovieSlider
+          title="My TV Watched"
+          endpoint="/todo/tv/watched"
+          movies={watchedTV}
+          mediaType="tv"
+        />
+      )}
 
-      <MovieSlider
-        title="My TV Watched"
-        endpoint="/todo/tv/watched"
-        movies={watchedTV}
-        mediaType="tv"
-      />
-
-      <MovieSlider
-        title="My TV Waiting next season"
-        endpoint="/todo/tv/waiting_next_season"
-        movies={waitingNextSeasonTV}
-        mediaType="tv"
-      />
+      {waitingNextSeasonTV && (
+        <MovieSlider
+          title="My TV Waiting next season"
+          endpoint="/todo/tv/waiting_next_season"
+          movies={waitingNextSeasonTV}
+          mediaType="tv"
+        />
+      )}
     </Layout>
   );
 };

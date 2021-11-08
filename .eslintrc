@@ -103,6 +103,7 @@
     "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".ts"] }],
     "radix": "off",
     "react/require-default-props": "off",
+    "react-hooks/exhaustive-deps": "off",
     "prefer-destructuring": ["error", { "object": true, "array": false }]
   }
 }

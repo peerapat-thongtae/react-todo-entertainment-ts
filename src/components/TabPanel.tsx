@@ -5,7 +5,6 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import CastTab from './CastTab';
-import CreatorTab from './CreatorTab';
 import MovieTab from './MovieTab';
 import CompanyTab from './CompanyTab';
 import PosterTab from './PosterTab';
@@ -66,9 +65,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export default function TabBottomMovie(props: any) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(2);
   const casts = props.movie && props.movie.credits && props.movie.credits.cast;
-  const crews = props.movie && props.movie.credits && props.movie.credits.crew;
   const companies =
     props.movie &&
     props.movie.production_companies &&
@@ -89,10 +87,6 @@ export default function TabBottomMovie(props: any) {
     {
       label: 'Cast',
       panel: <CastTab casts={casts} />,
-    },
-    {
-      label: 'Creator',
-      panel: <CreatorTab crews={crews} />,
     },
     {
       label: 'Similar',

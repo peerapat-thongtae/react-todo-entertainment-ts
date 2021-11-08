@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Lightbox from 'react-image-lightbox';
 import MovieHelper from 'utils/MovieHelper';
 import 'react-image-lightbox/style.css';
+import ImageCustom from './ImageCustom';
 
 const PosterTab = (props: any) => {
   const { images } = props;
@@ -20,14 +21,14 @@ const PosterTab = (props: any) => {
             images.map((image: any, index: number) => {
               return (
                 <div key={index} className="post">
-                  <div className="  mb-2">
-                    <img
+                  <div className="mb-2">
+                    <ImageCustom
                       src={MovieHelper.originalImagePath(image.file_path)}
-                      className="lazyload cursor-pointer"
                       onClick={() => {
                         setIsOpen(true);
                         setPhotoIndex(index);
-                      }} />
+                      }}
+                    />
                   </div>
                 </div>
               );

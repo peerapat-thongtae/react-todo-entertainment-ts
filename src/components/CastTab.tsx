@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import MovieHelper from 'utils/MovieHelper';
+import ImageCustom from './ImageCustom';
 
 const CastTab = (props: any) => {
   const casts = props.casts || [];
@@ -14,9 +15,8 @@ const CastTab = (props: any) => {
                 <div key={index} className="post">
                   <Link to={`/person/${cast.id}`}>
                     <div className="card__img">
-                      <img
+                      <ImageCustom
                         src={MovieHelper.posterPath(cast.profile_path)}
-                        className="lazyload"
                       />
                     </div>
                     <h3 className="cast_name">{cast.name}</h3>

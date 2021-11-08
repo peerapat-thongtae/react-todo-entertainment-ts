@@ -12,7 +12,7 @@ const ListSearch = (props: any) => {
     <>
       {props.results.length > 0
         ? props.results.slice(0, 10).map((result: any, key: number) => (
-          <Link to={`/${result.media_type}/${result.id}`} key={key}>
+          <Link to={`/${result.media_type}/${result.id}`} key={key} onClick={props.closeModal}>
             <div className="flex justify-start cursor-pointer text-gray-700 hover:text-blue-400 hover:bg-blue-100 rounded-md px-2 py-2 my-2">
               <span className="bg-gray-400 h-2 w-2 m-2 rounded-full" />
               <div className="flex-grow font-medium px-2">
@@ -99,7 +99,10 @@ const SearchModal = (props: any) => {
                 </div>
                 <div className="py-3 text-sm">
                   {isSearching === false ? (
-                    <ListSearch results={results} />
+                    <ListSearch
+                      results={results}
+                      closeModal={handleCloseModal}
+                    />
                   ) : (
                     <Loading />
                   )}

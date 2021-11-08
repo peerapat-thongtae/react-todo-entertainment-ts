@@ -5,7 +5,6 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import CastTab from './CastTab';
-import CreatorTab from './CreatorTab';
 import MovieTab from './MovieTab';
 import CompanyTab from './CompanyTab';
 import SeasonTab from './SeasonTab';
@@ -67,7 +66,6 @@ export default function TabBottomTV(props: any) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const casts = props.movie && props.movie.credits && props.movie.credits.cast;
-  const crews = props.movie && props.movie.credits && props.movie.credits.crew;
   const companies =
     props.movie &&
     props.movie.production_companies &&
@@ -88,10 +86,7 @@ export default function TabBottomTV(props: any) {
       label: 'Cast',
       panel: <CastTab casts={casts} />,
     },
-    {
-      label: 'Creator',
-      panel: <CreatorTab crews={crews} />,
-    },
+
     {
       label: 'Seasons',
       panel: <SeasonTab seasons={seasons} movieId={props.movie.id} />,

@@ -7,7 +7,9 @@ const loader = (state = {}, action: any) => {
         isLoading: action.payload,
       };
     default:
-      return state;
+      return {
+        isLoading: false,
+      };
   }
 };
 

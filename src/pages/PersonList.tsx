@@ -9,19 +9,17 @@ const PersonList = (props: any) => {
   const { getPersons, title } = props;
   const [persons, setPersons]: any = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const query = {
-    page: 1,
-  };
+
   useEffect(() => {
     props.setLoadingPage(true);
-
-    getPersons(query)
-      .then((res: any) => {
+    Promise.all([
+      getPersons({ page: 1 }).then((res: any) => {
         setPersons(res.results);
-      })
-      .finally(() => {
-        props.setLoadingPage(false);
-      });
+      }),
+    ]).finally(() => {
+      props.setLoadingPage(false);
+    });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props]);
 

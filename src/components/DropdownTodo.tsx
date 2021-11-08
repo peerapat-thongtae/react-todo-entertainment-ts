@@ -31,6 +31,7 @@ const DropdownTodo = (props: any) => {
     <div
       className={`relative inline-flex 
       ${!props.user.isAuthenticated && 'hidden'}`}
+      key={media.id}
     >
       <svg
         className="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none"
