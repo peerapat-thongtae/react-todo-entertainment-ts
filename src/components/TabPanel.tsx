@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export default function TabBottomMovie(props: any) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(2);
+  const [value, setValue] = React.useState(0);
   const casts = props.movie && props.movie.credits && props.movie.credits.cast;
   const companies =
     props.movie &&
