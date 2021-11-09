@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, { useState } from 'react';
+import React from 'react';
 import MovieHelper from 'utils/MovieHelper';
 import 'react-image-lightbox/style.css';
 import ImageCustom from './ImageCustom';
@@ -27,6 +27,8 @@ const VideoTab = (props: any) => {
                       }}
                     />
                     <h3 className="cast_name">{video.name}</h3>
+                    <p className="post_info">{video.type}</p>
+
                   </div>
                 </div>
               );
