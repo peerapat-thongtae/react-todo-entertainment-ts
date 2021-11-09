@@ -1,40 +1,58 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+/* eslint-disable prettier/prettier */
+import React, { useState } from 'react';
 import MovieHelper from 'utils/MovieHelper';
-import styled from 'styled-components';
+import 'react-image-lightbox/style.css';
+import ImageCustom from './ImageCustom';
+import 'react-modal-video/scss/modal-video.scss';
 
-// สร้าง Component ชื่อ Button โดยมันก็คือ <button> ที่มี style ตามที่เราเขียนลงไป
-const Button = styled.button`
-  background-color: white;
-  color: blue;
-  border: 2px solid blue;
-`;
 const VideoTab = (props: any) => {
-  const videos = props.videos || [];
+  const { videos } = props;
+  // const imageLinks = images && images.map((image: any) => {
+  //   return MovieHelper.originalImagePath(image.file_path);
+  // });
   return (
-    <section id="top_movies" className="clearfix">
+    <section id="" className="clearfix">
       <div className="wrapper">
-        <div className="gallery">
-          <div className="row">
-            {videos &&
-              videos.map((video: any, index: React.Key | undefined) => {
-                return (
-                  <div className="pic post" key={index}>
-                    <div className="card__lightbox poster">
-                      <div className="backdrop">
-                        <img
-                          src={MovieHelper.posterPath('')}
-                          className="lazyload"
-                        />
-                      </div>
-                      <h6 className="cast_name">ssss</h6>
-                    </div>
+
+        <div className="grid grid-cols-6 gap-8 row">
+          {videos &&
+            videos.map((video: any, index: number) => {
+              return (
+                <div key={index} className="post">
+                  <div className="">
+                    <ImageCustom
+                      src={MovieHelper.youtubePath(video.key).thumbnail}
+                      onClick={() => {
+                        window.open(MovieHelper.youtubePath(video.key).url, '_blank');
+                      }}
+                    />
+                    <h3 className="cast_name">{video.name}</h3>
                   </div>
-                );
-              })}
-          </div>
+                </div>
+              );
+            })}
+        </div>
+        <div>
+          {/* {isOpen && (
+            <Lightbox
+              mainSrc={imageLinks[photoIndex]}
+              nextSrc={imageLinks[(photoIndex + 1) % imageLinks.length]}
+              prevSrc={
+                imageLinks[(photoIndex + imageLinks.length - 1)
+                % imageLinks.length]}
+              onCloseRequest={() => setIsOpen(false)}
+              onMovePrevRequest={() =>
+                setPhotoIndex(
+                  (photoIndex + imageLinks.length - 1) % imageLinks.length)
+              }
+              onMoveNextRequest={() =>
+                setPhotoIndex((photoIndex + 1) % imageLinks.length)
+              }
+            />
+          )} */}
         </div>
       </div>
+
     </section>
   );
 };

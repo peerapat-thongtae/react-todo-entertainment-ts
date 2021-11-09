@@ -30,10 +30,10 @@ const MovieDetail = (props: any) => {
   useEffect(() => {
     setLoading(true);
     Promise.all([
-      MovieService.getMovieDetail(props.match.params.id).then((res) => {
+      MovieService.getMovieDetail(movieId).then((res) => {
         setMovie(res);
       }),
-      MovieService.getMovieWatchProviders(props.match.params.id).then((res) => {
+      MovieService.getMovieWatchProviders(movieId).then((res) => {
         setWatchProviders((res.results.TH && res.results.TH.flatrate) || null);
       }),
     ]).finally(() => {

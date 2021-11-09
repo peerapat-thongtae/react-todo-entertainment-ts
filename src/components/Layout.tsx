@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import FilterModal from './FilterModal';
+import Footer from './Footer';
 import Header from './Header';
 import Loading from './Loading';
 import SearchModal from './SearchModal';
@@ -10,14 +11,16 @@ const Layout = ({ children, loader, modal }: any) => {
   return (
     <>
       {/* <LoadingPage show={loader.isLoading} /> */}
-      <main className="md:pt-32 ">
+      <main className="md:pt-32 pb-20">
         <Header />
-        {loader.isLoading ? <Loading /> : children}
-        {/* {loader.isLoading ? <LoadingPage show={loader.isLoading} /> : children} */}
+        <div className="h-full">
+          {loader.isLoading ? <Loading /> : children}
+        </div>
       </main>
+      <Footer />
+
       <SearchModal />
       <FilterModal />
-      {/* <Footer /> */}
     </>
   );
 };

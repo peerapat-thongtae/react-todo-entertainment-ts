@@ -10,6 +10,7 @@ import CompanyTab from './CompanyTab';
 import PosterTab from './PosterTab';
 import KeywordTab from './KeywordTab';
 import CollectionTab from './CollectionTab';
+import VideoTab from './VideoTab';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -77,6 +78,9 @@ export default function TabBottomMovie(props: any) {
   const backdrops =
     props.movie && props.movie.images && props.movie.images.backdrops;
 
+  const videos =
+    props.movie && props.movie.videos && props.movie.videos.results;
+
   const collections = props.movie && props.movie.belongs_to_collection;
 
   const handleChange = (event: React.ChangeEvent<any>, newValue: number) => {
@@ -107,6 +111,10 @@ export default function TabBottomMovie(props: any) {
     {
       label: 'Backdrops',
       panel: <PosterTab images={backdrops} />,
+    },
+    {
+      label: 'Videos',
+      panel: <VideoTab videos={videos} />,
     },
   ];
 

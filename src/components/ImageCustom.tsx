@@ -7,7 +7,7 @@ const ImageCustom = (props: any) => {
   return (
     <>
       {loadImage && (
-        <div className="flex justify-center aligns-center">
+        <div className="flex justify-center aligns-center mx-auto">
           <LoadIcon />
         </div>
       )}

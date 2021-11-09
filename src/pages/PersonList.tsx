@@ -1,36 +1,35 @@
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ButtonFilter from 'components/ButtonFilter';
 import DropdownSort from 'components/DropdownSort';
+import Loading from 'components/Loading';
 import PersonCard from 'components/PersonCard';
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { setLoadingPage } from 'store/actions/loader';
 
 const PersonList = (props: any) => {
   const { getPersons, title } = props;
   const [persons, setPersons]: any = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(true);
+  const [loadingButton, setLoadingButton] = useState(false);
 
   useEffect(() => {
-    props.setLoadingPage(true);
+    setLoading(true);
     Promise.all([
       getPersons({ page: 1 }).then((res: any) => {
         setPersons(res.results);
       }),
     ]).finally(() => {
-      props.setLoadingPage(false);
+      setLoading(false);
     });
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props]);
+  }, [getPersons]);
 
   const loadmorePerson = async () => {
-    props.setLoadingPage(true);
+    setLoadingButton(true);
     setCurrentPage(currentPage + 1);
-    // if (currentPage !== 1) {
     const result = await getPersons({ page: currentPage + 1 });
     setPersons([...persons, ...result.results]);
-    props.setLoadingPage(false);
-    // }
+    setLoadingButton(false);
   };
   return (
     <div className="m-5">
@@ -45,22 +44,33 @@ const PersonList = (props: any) => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-4 gap-3">
-        {persons.map((person: any, index: number) => (
-          <PersonCard key={index} person={person} />
-        ))}
-      </div>
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className="grid grid-cols-4 gap-3">
+          {persons &&
+            persons.map((person: any, index: number) => (
+              <PersonCard key={index} person={person} />
+            ))}
+        </div>
+      )}
+
       <div className="flex justify-center mt-5">
         <button
           type="button"
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-          onClick={() => loadmorePerson}
+          onClick={loadmorePerson}
+          disabled={loadingButton}
         >
-          Load more...
+          {loadingButton ? (
+            <FontAwesomeIcon icon={faSpinner} />
+          ) : (
+            'Load more.... '
+          )}
         </button>
       </div>
     </div>
   );
 };
 
-export default connect(null, { setLoadingPage })(PersonList);
+export default PersonList;
