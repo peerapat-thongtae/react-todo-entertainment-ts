@@ -74,6 +74,10 @@ export default function PersonBottomTab(props: any) {
     props.person.movie_credits &&
     props.person.movie_credits.crew;
 
+  const directing_movies = crew_movies.filter((movie: any) => {
+    return movie.job === 'Director';
+  });
+
   const crew_tv =
     props.person && props.person.tv_credits && props.person.tv_credits.crew;
 
@@ -95,7 +99,7 @@ export default function PersonBottomTab(props: any) {
           movies={
             props.person.known_for_department === 'Acting'
               ? cast_movies
-              : crew_movies
+              : directing_movies
           }
           mediaType="movie"
         />

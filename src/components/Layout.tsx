@@ -5,10 +5,13 @@ import FilterModal from './FilterModal';
 import Footer from './Footer';
 import Header from './Header';
 import Loading from './Loading';
+import LoadingPage from './LoadingPage';
 import SearchModal from './SearchModal';
 
 const Layout = ({ children, loader, modal }: any) => {
-  return (
+  return loader.isLoading ? (
+    <LoadingPage show={loader.isLoading} />
+  ) : (
     <>
       {/* <LoadingPage show={loader.isLoading} /> */}
       <main className="md:pt-32 pb-20">

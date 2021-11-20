@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import Lightbox from 'react-image-lightbox';
 import MovieHelper from 'utils/MovieHelper';
+import ImageCustom from './ImageCustom';
 
 const PersonImageTab = (props: any) => {
   const { images } = props;
@@ -20,14 +21,14 @@ const PersonImageTab = (props: any) => {
               return (
                 <div key={index} className="post">
                   <div className=" mb-2">
-                    <img
+                    <ImageCustom
                       src={MovieHelper.originalImagePath(image.file_path)}
-                      className="lazyload"
                       onClick={() => {
                         setIsOpen(true);
                         setPhotoIndex(index);
                       }}
                     />
+
                   </div>
                 </div>
               );

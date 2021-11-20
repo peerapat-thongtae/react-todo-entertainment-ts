@@ -6,6 +6,7 @@ import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import CastTab from './CastTab';
 import EpisodeTab from './EpisodeTab';
+import VideoTab from './VideoTab';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -65,6 +66,8 @@ export default function SeasonBottomTab(props: any) {
   const casts = props.movie && props.movie.credits && props.movie.credits.cast;
 
   const episodes = props.movie && props.movie.episodes;
+  const videos =
+    props.movie && props.movie.videos && props.movie.videos.results;
 
   const handleChange = (event: React.ChangeEvent<any>, newValue: number) => {
     setValue(newValue);
@@ -79,6 +82,10 @@ export default function SeasonBottomTab(props: any) {
     {
       label: 'Episodes',
       panel: <EpisodeTab episodes={episodes} />,
+    },
+    {
+      label: 'Videos',
+      panel: <VideoTab videos={videos} />,
     },
   ];
 

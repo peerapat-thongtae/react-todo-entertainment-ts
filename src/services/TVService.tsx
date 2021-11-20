@@ -68,7 +68,7 @@ const TVService = {
       const res = await ApiMovieHelper({
         method: 'GET',
         url: `/3/tv/${tvId}/season/${seasonNumber}`,
-        params: { append_to_response: 'credits' },
+        params: { append_to_response: 'credits,videos' },
       });
       return res.data;
     } catch (err) {

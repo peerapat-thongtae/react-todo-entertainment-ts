@@ -19,7 +19,8 @@ const MovieService = {
         method: 'GET',
         url: `/3/movie/${movieId}`,
         params: {
-          append_to_response: 'credits,similar,videos,keywords,images',
+          append_to_response:
+            'credits,similar,videos,keywords,images,external_ids',
         },
       });
       return res.data;

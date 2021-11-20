@@ -1,5 +1,6 @@
 import {
   faFacebook,
+  faImdb,
   faInstagram,
   faTwitter,
 } from '@fortawesome/free-brands-svg-icons';
@@ -24,6 +25,11 @@ const linkExternal = (type: string, external: string) => {
       return {
         icon: faTwitter,
         link: `https://twitter.com/${external}`,
+      };
+    case 'imdb':
+      return {
+        icon: faImdb,
+        link: `https://imdb.com/title/${external}`,
       };
     default:
       return {
