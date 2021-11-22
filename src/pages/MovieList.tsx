@@ -12,6 +12,7 @@ import { setLoadingPage } from 'store/actions/loader';
 const MovieList = (props: any) => {
   const { getMovies, title, mediaType, sortShow, filterShow } = props;
   const [movies, setMovies]: any = useState([]);
+  const [count, setCount]: any = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [loadingButton, setLoadingButton] = useState(false);
@@ -23,6 +24,7 @@ const MovieList = (props: any) => {
     };
     getMovies(query).then((res: any) => {
       setMovies(res.results);
+      setCount(res.count);
       setLoading(false);
     });
   }, [getMovies]);
@@ -40,7 +42,9 @@ const MovieList = (props: any) => {
     <Layout>
       <div className="m-5">
         <div className="flex font-bold mb-6">
-          <div className="w-1/2 h-12 ml-10">{title}</div>
+          <div className="w-1/2 h-12 ml-10">
+            {title} {count && `(${count})`}
+          </div>
           <div className="w-1/2 h-12 mr-10 text-right">
             <div className="inline-block mr-4">
               <DropdownSort sortShow={sortShow} />
@@ -58,6 +62,7 @@ const MovieList = (props: any) => {
               movies={movies}
               page={currentPage}
               mediaType={mediaType || 'movie'}
+              count={count}
             />
             <div className="flex justify-center mt-5">
               <button

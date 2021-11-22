@@ -7,39 +7,39 @@ import TodoService from 'services/TodoService';
 import { setLoadingPage } from 'store/actions/loader';
 
 const UserHome = (props: any) => {
-  const [watchlistMovies, setWatchlistMovies] = useState([]);
-  const [watchedMovies, setWatchedMovies] = useState([]);
+  const [watchlistMovies, setWatchlistMovies] = useState<any>();
+  const [watchedMovies, setWatchedMovies] = useState<any>();
 
-  const [watchlistTV, setWatchlistTV] = useState([]);
-  const [watchingTV, setWatchingTV] = useState([]);
-  const [watchedTV, setWatchedTV] = useState([]);
-  const [waitingNextSeasonTV, setWaitingNextSeasonTV] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [watchlistTV, setWatchlistTV] = useState<any>();
+  const [watchingTV, setWatchingTV] = useState<any>();
+  const [watchedTV, setWatchedTV] = useState<any>();
+  const [waitingNextSeasonTV, setWaitingNextSeasonTV] = useState<any>();
+  const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
     setLoading(true);
 
     Promise.all([
       TodoService.getTodoMovieByStatus('watchlist').then((res) => {
-        setWatchlistMovies(res.results);
+        setWatchlistMovies(res);
       }),
       TodoService.getTodoMovieByStatus('watched').then((res) => {
-        setWatchedMovies(res.results);
+        setWatchedMovies(res);
       }),
 
       TodoService.getTodoTVByStatus('watchlist').then((res) => {
-        setWatchlistTV(res.results);
+        setWatchlistTV(res);
       }),
 
       TodoService.getTodoTVByStatus('watching').then((res) => {
-        setWatchingTV(res.results);
+        setWatchingTV(res);
       }),
 
       TodoService.getTodoTVByStatus('watched').then((res) => {
-        setWatchedTV(res.results);
+        setWatchedTV(res);
       }),
 
       TodoService.getTodoTVByStatus('waiting_next_season').then((res) => {
-        setWaitingNextSeasonTV(res.results);
+        setWaitingNextSeasonTV(res);
       }),
     ]).finally(() => {
       setLoading(false);
@@ -53,45 +53,45 @@ const UserHome = (props: any) => {
         <div>
           <div id="movie_watchlist">
             <MovieSlider
-              title="My Movie Watchlist"
+              title={`My Movie Watchlist (${watchlistMovies.count})`}
               endpoint="/todo/movie/watchlist"
-              movies={watchlistMovies}
+              movies={watchlistMovies.results}
               mediaType="movie"
             />
           </div>
 
           <MovieSlider
-            title="My Movie Watched"
+            title={`My Movie Watched (${watchedMovies.count})`}
             endpoint="/todo/movie/watched"
-            movies={watchedMovies}
+            movies={watchedMovies.results}
             mediaType="movie"
           />
 
           <MovieSlider
-            title="My TV Watchlist"
+            title={`My TV Watchlist (${watchlistTV.count})`}
             endpoint="/todo/tv/watchlist"
-            movies={watchlistTV}
+            movies={watchlistTV.results}
             mediaType="tv"
           />
 
           <MovieSlider
-            title="My TV Watching"
+            title={`My TV Watching (${watchingTV.count})`}
             endpoint="/todo/tv/watching"
-            movies={watchingTV}
+            movies={watchingTV.results}
             mediaType="tv"
           />
 
           <MovieSlider
-            title="My TV Watched"
+            title={`My TV Watched (${watchedTV.count})`}
             endpoint="/todo/tv/watched"
-            movies={watchedTV}
+            movies={watchedTV.results}
             mediaType="tv"
           />
 
           <MovieSlider
-            title="My TV Waiting next season"
+            title={`My TV Waiting next season (${waitingNextSeasonTV.count})`}
             endpoint="/todo/tv/waiting_next_season"
-            movies={waitingNextSeasonTV}
+            movies={waitingNextSeasonTV.results}
             mediaType="tv"
           />
         </div>
